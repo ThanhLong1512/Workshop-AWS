@@ -1,0 +1,204 @@
+[
+{
+	"uri": "//localhost:1313/",
+	"title": "Building a Containerized Web Application on AWS with CI/CD Pipeline",
+	"tags": [],
+	"description": "",
+	"content": "Building a Containerized Web Application on AWS with CI/CD Pipeline Overview This workshop guides you through building a complete containerized web application system on AWS with an automated CI/CD pipeline. Starting from application development on GitHub, we’ll cover Docker containerization, deployment to AWS via load balancers, and integration of security, monitoring, and notification services.\nArchitecture Includes Frontend: React.js (containerized)\nBackend: Node.js/Express.js API (containerized)\nDatabase: MongoDB or PostgreSQL\nSecurity: KMS encryption, SNS notifications\nMonitoring: CloudWatch metrics and alerts\nObjectives Learn Container Technology: Master Docker containerization for packaging and deploying applications.\nBuild CI/CD Pipeline: Automate build, test, and deploy workflows from GitHub to AWS.\nInfrastructure Management: Configure load balancing, auto-scaling, security groups, and networking.\nSecurity \u0026amp; Monitoring: Integrate WAF, KMS encryption, CloudWatch, and SNS alerts.\nProduction-Ready: Deploy a highly available, scalable, and secure system.\nEstimated Costs AWS Free Tier: EC2 t2.micro, ALB (750 hours/month)\nCloudFront: $0.085/GB for the first 10TB\nRoute 53: $0.50/hosted zone/month\nKMS: $1/key/month + $0.03/10,000 requests\nSNS: $0.50/1 million requests\nTotal Estimate: $10–30/month (varies by traffic)\nWorkshop Steps Introduction Prerequisites Application Containerization Infrastructure Deployment Application Security Monitoring \u0026amp; Observability Dọn dẹp tài nguyên "
+},
+{
+	"uri": "//localhost:1313/3-accessibilitytoinstances/3.1-public-instance/",
+	"title": "Connect to Public Instance",
+	"tags": [],
+	"description": "",
+	"content": "\nGo to EC2 service management console. Click on Public Linux Instance. Click Actions. Click Security. Click Modify IAM role. At the Modify IAM role page. Click to select SSM-Role. Click Save. You will need to wait about 10 minutes before performing the next step. This time our EC2 instance will automatically register with the Session Manager.\nGo to the AWS Systems Manager service management console Drag the left menu slider down. Click Session Manager. Click Start Session. Then select Public Linux Instance and click Start session to access the instance. Terminal will appear on the browser. Testing with the command sudo tcpdump -nn port 22 and sudo tcpdump we will see no SSH traffic but only HTTPS traffic. Above, we have created a connection to the public instance without opening SSH port 22, for better security, avoiding any attack to the SSH port.\nOne disadvantage of the above method is that we have to open the Security Group outbound at port 443 to the internet. Since it\u0026rsquo;s a public instance, it probably won\u0026rsquo;t be a problem, but if you want extra security, you can block port 443 to the internet and still use the Session Manager. We will go through this in the private instance section below.\nYou can click terminate to end the currently connected session before proceeding to the next step.\n"
+},
+{
+	"uri": "//localhost:1313/3-accessibilitytoinstances/3.2-private-instance/3.2.2-createvpcendpoint/3.2.2.1-endpointssm/",
+	"title": "Create Endpoint ssm",
+	"tags": [],
+	"description": "",
+	"content": "Create VPC Endpoint SSM Go to VPC service management console Click Endpoints. Click Create endpoint. At the Create endpoint page. In the Name tag field, enter SSM. In the Service Category section, select AWS Services. In the Service Name section, In the Service category section, select: AWS services In the Service Name section enter: SSM then select Service Name: com.amazonaws.ap-southeast-1.ssm. In the Service Name column, click com.amazonaws.ap-southeast-1.ssm. In the VPC section, select Lab VPC. Select the first AZ, then select the Lab Private Subnet subnet. Scroll down. In the Security Group section, select the Security group SG VPC Endpoint that we created earlier. In the Policy section, select Full access. Scroll down. Click Create endpoint. We have created the VPC Interface Endpoint for SSM. "
+},
+{
+	"uri": "//localhost:1313/2-prerequiste/2.1-createec2/2.1.1-createvpc/",
+	"title": "Create VPC",
+	"tags": [],
+	"description": "",
+	"content": "Create VPC Lab VPC Go to VPC service management console Click Your VPC. Click Create VPC. At the Create VPC page. In the Name tag field, enter Mern-stack VPC. In the IPv4 CIDR field, enter: 10.0.0.0/24. Click Create VPC. Check VPC status after creation "
+},
+{
+	"uri": "//localhost:1313/3-accessibilitytoinstances/3.2-private-instance/3.2.1-enablevpcdns/",
+	"title": "Enable DNS hostnames",
+	"tags": [],
+	"description": "",
+	"content": "Enable DNS hostnames on VPC. To create VPC Endpoint we will need to enable DNS hostnames feature on VPC. Go to VPC service management console\nClick Your VPCs.\nSelect Lab VPC.\nClick Actions.\nClick Edit DNS hostnames.\nClick Endpoint, then click Create Endpoint.\nAt the Edit DNS hostnames page. Click to select Enable. Click Save changes. "
+},
+{
+	"uri": "//localhost:1313/1-introduce/",
+	"title": "Introduction",
+	"tags": [],
+	"description": "",
+	"content": "Overview This architecture describes a Serverless Web Application built entirely on AWS, leveraging managed services to create a highly scalable, cost-optimized, and secure application. The application follows a 3-tier architecture model, consisting of frontend, backend, and supporting services.\nKey Components of the Architecture User Access \u0026amp; Code Management GitHub: Source code management and version control for the entire application User: End-users accessing the application via web browsers Security \u0026amp; Network Layer (Lớp bảo mật và mạng) AWS Route 53 is a highly scalable and reliable DNS (Domain Name System) service. It routes user requests to AWS infrastructure, such as EC2 instances, Elastic Load Balancers, or Amazon S3 buckets. Route 53 can also direct traffic to non-AWS infrastructure. AWS Application Load Balancer (ALB) operates at Layer 7 (Application Layer) of the OSI model, routing traffic based on request content. ALB supports path-based and host-based routing, distributing traffic across multiple target groups. It integrates seamlessly with AWS services like Auto Scaling, ECS, and Lambda. AWS CloudFront is a global Content Delivery Network (CDN) that delivers content with low latency and high transfer speeds. It caches content at edge locations worldwide, reducing page load times and improving user experience. AWS WAF (Web Application Firewall) protects applications from common web exploits like SQL injection and cross-site scripting (XSS). It allows custom rules to filter, monitor, and block malicious traffic based on IP addresses, HTTP headers, HTTP body, or URI strings. Application Layer (Lớp ứng dụng) Frontend Container Runs on port 80 Uses Nginx as the web server Can host React, Angular, or Vue.js applications Port 4375 for internal communications Backend Container Runs on port 4000 Uses Express.js (Node.js) framework Handles business logic \u0026amp; API endpoints Connects with other AWS services AWS Managed Services Amazon EC2 (Elastic Compute Cloud) provides scalable compute capacity in the cloud. Users can launch virtual servers (instances) with customizable CPU, memory, storage, and networking configurations. EC2 offers various instance types optimized for different workloads (compute-optimized, memory-optimized, storage-optimized). AWS KMS (Key Management Service) is a fully managed encryption key service for creating and controlling cryptographic keys. It integrates with most AWS services to protect stored data and uses Hardware Security Modules (HSMs) for enhanced security. Amazon CloudWatch is a monitoring and observability service for DevOps engineers, developers, SREs, and IT managers. It provides actionable insights to monitor applications, track system-wide performance changes, optimize resource usage, and maintain operational health.. Amazon S3 (Simple Storage Service) is a highly durable object storage service for storing and retrieving any amount of data. It offers 99.999999999% (11 nines) durability and powers millions of applications worldwide. S3 includes management features for data organization and fine-grained access control. Amazon SNS (Simple Notification Service) is a fully managed messaging service for application-to-application (A2A) and application-to-person (A2P) communication. It enables high-throughput, push-based, many-to-many messaging for distributed systems, microservices, and serverless applications. Database \u0026amp; Data Processing MongoDB: NoSQL database for application data storage Integrated with the AWS ecosystem via managed services "
+},
+{
+	"uri": "//localhost:1313/2-prerequiste/2.1-createec2/",
+	"title": "Preparing VPC and EC2",
+	"tags": [],
+	"description": "",
+	"content": "In this step, we will need to create a VPC with 2 public / private subnets. Then create 1 EC2 Instance Linux located in the public subnet, 1 EC2 Instance Windows located in the private subnet.\nTo learn how to create EC2 instances and VPCs with public/private subnets, you can refer to the lab:\nAbout Amazon EC2 Works with Amazon VPC Content Create VPC Create Subnet Create Linux server "
+},
+{
+	"uri": "//localhost:1313/4-s3log/4.1-updateiamrole/",
+	"title": "Update IAM Role",
+	"tags": [],
+	"description": "",
+	"content": "For our EC2 instances to be able to send session logs to the S3 bucket, we will need to update the IAM Role assigned to the EC2 instance by adding a policy that allows access to S3.\nUpdate IAM Role Go to IAM service management console Click Roles. In the search box, enter SSM. Click on the SSM-Role role. Click Attach policies. In the Search box enter S3. Click the policy AmazonS3FullAccess. Click Attach policy. In the production environment, we will grant stricter permissions to the specified S3 bucket. In the framework of this lab, we use the policy AmazonS3FullAccess for convenience.\nNext, we will proceed to create an S3 bucket to store session logs.\n"
+},
+{
+	"uri": "//localhost:1313/3-accessibilitytoinstances/3.2-private-instance/",
+	"title": "Connect to Private instance",
+	"tags": [],
+	"description": "",
+	"content": "For Windows instance located in private subnet, there is no public IP, no internet gateway so it cannot go out internet.\nWith this type of instance, the traditional way is to use Bastion host technique which is expensive and laborious, but here we will use Session Manager with this type.\nBasically, the private instance still has to open the TCP 443 port to System Manager, but we don\u0026rsquo;t want to allow connection go out to the internet, but only in its VPC, to enhance our security posture.\nTo do that, we have to include the System Manager endpoint in the VPC, that is, using the VPC interface endpoint:\nVPC interface endpoint is attached to the subnet, so this method can be done not only with private subnet but also with public subnet, meaning that with public subnet, you can completely prohibit TCP 443 go out to the internet.\nContent: Enable DNS hostnames Create VPC Endpoint Connect Private Instance "
+},
+{
+	"uri": "//localhost:1313/3-accessibilitytoinstances/3.2-private-instance/3.2.2-createvpcendpoint/3.2.2.2-endpointssmmessages/",
+	"title": "Create Endpoint ssmmessages",
+	"tags": [],
+	"description": "",
+	"content": "Create VPC Endpoint SSMMESSAGES Go to VPC service management console Click Endpoints. Click Create endpoint. At the Create endpoint page. In the Name tag field, enter SSMMESSAGES. In the Service Category section, select AWS Services. In the Service Name section, In the Service category select: AWS services In the Service Name field enter: ssmmessages then select Service Name: com.amazonaws.ap-southeast-1.ssmmessages. In the Service Name column, click com.amazonaws.ap-southeast-1.ssmmessages. In the VPC section, select Lab VPC. Select the first AZ, then select the Lab Private Subnet subnet. Scroll down. In the Security Group section, select the Security group SG VPC Endpoint that we created earlier. In the Policy section, select Full access Scroll down. Click Create endpoint. We have created the VPC Interface Endpoint SSMMESSAGES. "
+},
+{
+	"uri": "//localhost:1313/2-prerequiste/2.2-createiamrole/",
+	"title": "Create IAM Role",
+	"tags": [],
+	"description": "",
+	"content": "Create IAM Role In this step, we will proceed to create IAM Role. In this IAM Role, the policy AmazonSSMManagedInstanceCore will be assigned, this is the policy that allows the EC2 server to communicate with the Session Manager.\nGo to IAM service administration interface In the left navigation bar, click Roles. Click Create role. Click AWS service and click EC2. Click Next: Permissions. In the Search box, enter AmazonSSMManagedInstanceCore and press Enter to search for this policy. Click the policy AmazonSSMManagedInstanceCore. Click Next: Tags. Click Next: Review. Name the Role SSM-Role in Role Name Click Create Role . Next, we will make the connection to the EC2 servers we created with Session Manager.\n"
+},
+{
+	"uri": "//localhost:1313/4-s3log/4.2-creates3bucket/",
+	"title": "Create S3 Bucket",
+	"tags": [],
+	"description": "",
+	"content": "In this step, we will create an S3 bucket to store session logs sent from EC2 instances.\nCreate S3 Bucket Access S3 service management console Click Create bucket. At the Create bucket page. In the Bucket name field, enter the bucket name lab-yourname-bucket-0001 In the Region section, select Region you are doing the current lab. The name of the S3 bucket must not be the same as all other S3 buckets in the system. You can substitute your name and enter a random number when generating the S3 bucket name.\nScroll down and click Create bucket. When we created the S3 bucket we did Block all public access so our EC2 instances won\u0026rsquo;t be able to connect to S3 via the internet. In the next step, we will configure the S3 Gateway Endpoint feature to allow EC2 instances to connect to the S3 bucket via the VPC\u0026rsquo;s internal network.\n"
+},
+{
+	"uri": "//localhost:1313/2-prerequiste/2.1-createec2/2.1.2-createsubnet/",
+	"title": "Create Subnet",
+	"tags": [],
+	"description": "",
+	"content": "Create Subnet Click Subnets. Click Create subnet. At the Create subnet page. In the VPC ID section, click Mern-stack VPC. In the Subnet name field, enter Mern-stack Subnet. In the Availability Zone section, select the first Availability zone. In the field IPv4 CIRD block enter 10.0.0.0/28. 3. Scroll to the bottom of the page, click Create subnet.\nClick Mern-stack Subnet. Click Actions. Click Edit subnet settings. 5. Click Enable auto-assign public IPv4 address.\nClick Save. "
+},
+{
+	"uri": "//localhost:1313/3-accessibilitytoinstances/3.2-private-instance/3.2.2-createvpcendpoint/",
+	"title": "Create VPC Endpoint",
+	"tags": [],
+	"description": "",
+	"content": "Create VPC Endpoint SSM We will create 3 interface endpoints required by the Session Manager:\nInterface endpoints: com.amazonaws.region.ssm com.amazonaws.region.ec2messages com.amazonaws.region.ssmmessages You can refer to more here\nContent: Create Endpoint ssm Create Endpoint ssmmessages Create Endpoint ec2messages "
+},
+{
+	"uri": "//localhost:1313/2-prerequiste/2.3-sgandnetwork/2.3.1-createsg/",
+	"title": "Creating Security Groups",
+	"tags": [],
+	"description": "",
+	"content": "Creating Security Groups in Amazon VPC Overview\nSecurity Groups act as virtual firewalls for AWS resources Function as instance-level access control lists (ACLs) Enable control of inbound/outbound traffic by port and protocol Creating ALB Security Group\nNavigate to the VPC console\nSelect Security Groups from the left menu Click Create security group Configure basic information Security Group name: Enter alb-security-group Description: Security group for Application Load Balancer VPC: Select Mern-stack VPC Set up Inbound/Outbound Rules Click Add rule Rule 1: Type: HTTP Source: Anywhere (allow ping from all locations) Rule 2: Type: HTTPs Source: Anywhere (allow ping from all locations) Confirm Inbound/Outbound Rules and create the Security Group Verify the created Security Group Creating Application Security Group\nNavigate to the VPC console\nSelect Security Groups from the left menu Click Create security group Configure basic information Security Group name: Enter app-security-group Description: Security group for application containers VPC: Select Mern-stack VPC Set up Inbound/Outbound Rules\nClick Add rule Rule 1: Type: HTTP Source: Anywhere (allow ping from all locations) Rule 2: Type: HTTPs Source: Anywhere (allow ping from all locations) Confirm Inbound/Outbound Rules and create the Security Group\nVerify the created Security Group "
+},
+{
+	"uri": "//localhost:1313/2-prerequiste/",
+	"title": "Preparation ",
+	"tags": [],
+	"description": "",
+	"content": "\rYou need to prepare the MERN stack application and github accounts to perform this containerized web application deployment lab.\nTo learn how to create the foundational AWS services, you can refer to these labs:\nAbout Amazon EC2 Works with Amazon VPC Content Prepare VPC and EC2 Create IAM Role Prepare VPC and Networking Create Security Groups Setup Application Load Balancer Configure Route 53 Setup CloudFront Distribution Configure AWS WAF Create ECS Cluster Setup Container Registry "
+},
+{
+	"uri": "//localhost:1313/2-prerequiste/2.3-sgandnetwork/",
+	"title": "Security Groups &amp; Network Setup",
+	"tags": [],
+	"description": "",
+	"content": "Content Create Security Groups Setup Network "
+},
+{
+	"uri": "//localhost:1313/2-prerequiste/2.3-sgandnetwork/2.3.2-setupnetwork/",
+	"title": "Setup Network",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "//localhost:1313/3-accessibilitytoinstances/",
+	"title": "Connect to EC2 servers",
+	"tags": [],
+	"description": "",
+	"content": "In this step, we will connect to our EC2 servers, located in both the public and private subnets.\nContent 3.1. Connect to EC2 Public Server 3.2. Cconnect to EC2 Private Server\n"
+},
+{
+	"uri": "//localhost:1313/3-accessibilitytoinstances/3.2-private-instance/3.2.3-connectec2/",
+	"title": "Connect to instance",
+	"tags": [],
+	"description": "",
+	"content": "Assign IAM role and restart EC2 instance. Go to EC2 service management console Click Private Windows Instance. Click Actions. Click Security. Click Modify IAM Role. At the Modify IAM Role page. In the IAM role section, select SSM-Role. Click Save. Click Private Windows Instance. Click Instance state. Click Reboot instance to restart, then click Reboot to confirm. Please wait 5 minutes before doing the next step.\nConnect to the private EC2 instance. Go to System Manager - Session Manager service management console Click Start session. Click Private Windows Instance. Click Start session. Type ipconfig command to check the IP address information of Private Windows Instance as shown below. "
+},
+{
+	"uri": "//localhost:1313/3-accessibilitytoinstances/3.2-private-instance/3.2.2-createvpcendpoint/3.2.2.3-endpointec2messages/",
+	"title": "Create Endpoint ec2messages",
+	"tags": [],
+	"description": "",
+	"content": "Create VPC Endpoint EC2MESSAGES Go to VPC service management console Click Endpoints. Click Create endpoint. At the Create endpoint page. In the Name tag field, enter SSMMESSAGES. In the Service Category section, select AWS Services. In the Service Name section, In the Service category select: AWS services In the field Service Name enter: ec2 then select Service Name: com.amazonaws.ap-southeast-1.ec2messages. In the Service Name column, click com.amazonaws.ap-southeast-1.ec2messages. In the VPC section, select Lab VPC. Select the first AZ, then select the Lab Private Subnet subnet. Scroll down. In the Security Group section, select the Security group SG VPC Endpoint that we created earlier. In the Policy section, select Full access Scroll down. Click Create endpoint. We have created the VPC Interface Endpoint EC2MESSAGES.\nMake sure the 3 required endpoints have been created as shown below.\n"
+},
+{
+	"uri": "//localhost:1313/4-s3log/4.3-creategwes3/",
+	"title": "Create S3 Gateway endpoint",
+	"tags": [],
+	"description": "",
+	"content": " Go to VPC service management console Click Endpoints. Click Create endpoint. At the Create endpoint page. In the Name tag field, enter S3GW. In the Service Category section, click AWS services. In the search box enter S3, then select com.amazonaws.[region].s3 In the Services section, select com.amazonaws.[region].s3 with the Type of Gateway. In the VPC section, select Lab VPC. In the Route tables section, select both route tables. Scroll down, click Create endpoint. The next step is to configure Session Manager to store session logs to the S3 bucket we created.\n"
+},
+{
+	"uri": "//localhost:1313/4-s3log/",
+	"title": "Manage session logs",
+	"tags": [],
+	"description": "",
+	"content": "With Session Manager, we can view the history of connections to instances through Session history. However, we have not seen the details of the commands used in a session.\nIn this section, we will proceed to create an S3 bucket and configure the session logs feature to see the details of the commands used in the session.\nContent: Update IAM Role Create S3 Bucket Create S3 Gateway endpoint Configure Session logs "
+},
+{
+	"uri": "//localhost:1313/4-s3log/4.4-configsessionlogs/",
+	"title": "Monitor session logs",
+	"tags": [],
+	"description": "",
+	"content": "Monitor session logs Access System Manager - Session Manager service management console Click the Preferences tab. Click Edit. Scroll down, at S3 logging, click Enable. Uncheck Allow only encrypted S3 buckets. Click Choose a bucket name from the list. Select the S3 bucket you created. Scroll down, click Save to save the configuration.\nAccess System Manager - Session Manager service management console\nClick Start session. Click Private Windows Instance. Click Start session. Type the command ipconfig. Type the command hostname. Click Terminate to exit the session, click Terminate again to confirm. Check Session logs in S3 Go to S3 service management console Click on the name of the S3 bucket we created for the lab. Click on the object name sessions log On the objects detail page, click Open. Object logs will be opened in a new tab in the browser. You can view the stored commands in session logs. "
+},
+{
+	"uri": "//localhost:1313/2-prerequiste/2.1-createec2/2.1.3-createec2linux/",
+	"title": "Create EC2 instance",
+	"tags": [],
+	"description": "",
+	"content": " Go to EC2 service management console Click Instances. Click Launch instances. Name: Enter Mern-stack EC2.\nChoose an Amazon Machine Image (AMI):\nSelect Quick Start. Choose Amazon Linux. AMI: Select Amazon Linux 2 AMI. Pro Tip: The Amazon Linux 2 AMI is regularly updated by AWS with security patches and performance improvements. Using this AMI ensures a stable and secure foundation for your applications. Key Pair Configuration:\nClick Create key pair. Fill in the details as shown in the image. Security Note: The key pair is essential for authenticating access to your EC2 instance. Store the .pem file securely and avoid sharing it. Losing the key pair may result in permanent loss of access to your instance.\nNetwork Configuration\nUnder Network, select Mern-stack VPC. Under Subnet, choose Mern-stack Subnet. Under Auto-assign Public IP, select Use subnet setting (Enable). Review the settings and click Launch instance.\nOnce the instance is launched, click View all instances to check its details Wait for about 5 minutes until the Status check shows 2/2 checks passed and the instance state changes to Running.\nPro Tip: 2/2 checks passed status confirms that both the system check (performed by AWS) and the instance check (performed by the OS) were successful. This ensures your instance is ready for use.\n"
+},
+{
+	"uri": "//localhost:1313/5-portfwd/",
+	"title": "Port Forwarding",
+	"tags": [],
+	"description": "",
+	"content": "\rPort Forwarding is a useful way to redirect network traffic from one IP address - Port to another IP address - Port. With Port Forwarding we can access an EC2 instance located in the private subnet from our workstation.\nWe will configure Port Forwarding for the RDP connection between our machine and Private Windows Instance located in the private subnet we created for this exercise.\nCreate IAM user with permission to connect SSM Go to IAM service management console Click Users , then click Add users. At the Add user page. In the User name field, enter Portfwd. Click on Access key - Programmatic access. Click Next: Permissions. Click Attach existing policies directly.\nIn the search box, enter ssm. Click on AmazonSSMFullAccess. Click Next: Tags, click Next: Reviews. Click Create user. Save Access key ID and Secret access key information to perform AWS CLI configuration.\nInstall and Configure AWS CLI and Session Manager Plugin To perform this hands-on, make sure your workstation has AWS CLI and Session Manager Plugin installed -manager-working-with-install-plugin.html)\nMore hands-on tutorials on installing and configuring the AWS CLI can be found here.\nWith Windows, when extracting the Session Manager Plugin installation folder, run the install.bat file with Administrator permission to perform the installation.\nImplement Portforwarding Run the command below in Command Prompt on your machine to configure Port Forwarding. aws ssm start-session --target (your ID windows instance) --document-name AWS-StartPortForwardingSession --parameters portNumber=\u0026#34;3389\u0026#34;,localPortNumber=\u0026#34;9999\u0026#34; --region (your region) Windows Private Instance Instance ID information can be found when you view the EC2 Windows Private Instance server details.\nExample command: C:\\Windows\\system32\u0026gt;aws ssm start-session --target i-06343d7377486760c --document-name AWS-StartPortForwardingSession --parameters portNumber=\u0026#34;3389\u0026#34;,localPortNumber=\u0026#34;9999\u0026#34; --region ap-southeast-1 If your command gives an error like below: SessionManagerPlugin is not found. Please refer to SessionManager Documentation here: http://docs.aws.amazon.com/console/systems-manager/session-manager-plugin-not-found\nProve that you have not successfully installed the Session Manager Plugin. You may need to relaunch Command Prompt after installing Session Manager Plugin.\nConnect to the Private Windows Instance you created using the Remote Desktop tool on your workstation. In the Computer section: enter localhost:9999. Return to the administration interface of the System Manager - Session Manager service. Click tab Session history. We will see session logs with Document name AWS-StartPortForwardingSession. Congratulations on completing the lab on how to use Session Manager to connect and store session logs in S3 bucket. Remember to perform resource cleanup to avoid unintended costs.\n"
+},
+{
+	"uri": "//localhost:1313/6-cleanup/",
+	"title": "Clean up resources",
+	"tags": [],
+	"description": "",
+	"content": "We will take the following steps to delete the resources we created in this exercise.\nDelete EC2 instance Go to EC2 service management console\nClick Instances. Select both Public Linux Instance and Private Windows Instance instances. Click Instance state. Click Terminate instance, then click Terminate to confirm. Go to IAM service management console\nClick Roles. In the search box, enter SSM. Click to select SSM-Role. Click Delete, then enter the role name SSM-Role and click Delete to delete the role. Click Users. Click on user Portfwd. Click Delete, then enter the user name Portfwd and click Delete to delete the user. Delete S3 bucket Access System Manager - Session Manager service management console.\nClick the Preferences tab. Click Edit. Scroll down. In the section S3 logging. Uncheck Enable to disable logging. Scroll down. Click Save. Go to S3 service management console\nClick on the S3 bucket we created for this lab. (Example: lab-fcj-bucket-0001 ) Click Empty. Enter permanently delete, then click Empty to proceed to delete the object in the bucket. Click Exit. After deleting all objects in the bucket, click Delete\nEnter the name of the S3 bucket, then click Delete bucket to proceed with deleting the S3 bucket. Delete VPC Endpoints Go to VPC service management console Click Endpoints. Select the 4 endpoints we created for the lab including SSM, SSMMESSAGES, EC2MESSAGES, S3GW. Click Actions. Click Delete VPC endpoints. In the confirm box, enter delete.\nClick Delete to proceed with deleting endpoints. Click the refresh icon, check that all endpoints have been deleted before proceeding to the next step.\nDelete VPC Go to VPC service management console\nClick Your VPCs. Click on Lab VPC. Click Actions. Click Delete VPC. In the confirm box, enter delete to confirm, click Delete to delete Lab VPC and related resources.\n"
+},
+{
+	"uri": "//localhost:1313/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "//localhost:1313/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]
