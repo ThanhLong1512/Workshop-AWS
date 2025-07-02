@@ -109,7 +109,7 @@
 	"title": "Preparation ",
 	"tags": [],
 	"description": "",
-	"content": "\rYou need to prepare the MERN stack application and github accounts to perform this containerized web application deployment lab.\nTo learn how to create the foundational AWS services, you can refer to these labs:\nAbout Amazon EC2 Works with Amazon VPC Content Prepare VPC and EC2 Create IAM Role Prepare VPC and Networking Create Security Groups Setup Application Load Balancer Configure Route 53 Setup CloudFront Distribution Configure AWS WAF Create ECS Cluster Setup Container Registry "
+	"content": "\rYou need to prepare the MERN stack application and github accounts to perform this containerized web application deployment lab.\nTo learn how to create the foundational AWS services, you can refer to these labs:\nAbout Amazon EC2 Works with Amazon VPC Content Prepare VPC and EC2 Create IAM Role Security Groups \u0026amp; Network setup "
 },
 {
 	"uri": "//localhost:1313/2-prerequiste/2.3-sgandnetwork/",

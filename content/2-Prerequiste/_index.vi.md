@@ -21,4 +21,4 @@ Bạn cần tạo sẵn 1 Linux instance thuộc public subnet và 1 Window in
 
 - [Chuẩn bị VPC và EC2 Instance](2.1-createec2/)
 - [Tạo IAM Role](2.2-createiamrole/)
-- [Security Groups & Network setup](2.3-sgandnetwork/)
+- [Thiết lập bảo mật và mạng](2.3-sgandnetwork/)
