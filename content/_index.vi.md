@@ -42,8 +42,8 @@ Workshop này hướng dẫn bạn xây dựng một hệ thống ứng dụng w
 
 1.  [Giới thiệu](1-introduce/)
 2.  [Các bước chuẩn bị](2-Prerequiste/)
-3.  [Thiết lập và Containerization](3-Accessibilitytoinstance/)
-4.  [Triển khai Infrastructure](3-Accessibilitytoinstance/)
-5.  [Bảo mật cho ứng dụng](4-s3log/)
-6.  [Giám sát và Monitoring](5-Portfwd/)
-7.  [Dọn dẹp tài nguyên](6-cleanup/)
+3.  [Thiết lập và Containerization](3-Containerization/)
+4.  [Triển khai Infrastructure](4-Infrastructure/)
+5.  [Bảo mật cho ứng dụng](5-Security/)
+6.  [Giám sát và Monitoring](6-Monitoring/)
+7.  [Dọn dẹp tài nguyên](7-cleanup/)

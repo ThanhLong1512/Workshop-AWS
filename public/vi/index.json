@@ -1,10 +1,17 @@
 [
 {
-	"uri": "//localhost:1313/vi/4-s3log/4.1-updateiamrole/",
+	"uri": "//localhost:1313/vi/4-infrastructure/4.1-updateiamrole/",
 	"title": "Cập nhật IAM Role",
 	"tags": [],
 	"description": "",
 	"content": "Để các EC2 instance của chúng ta có thể gửi session log tới S3 bucket , chúng ta sẽ cần cập nhật IAM Role đã gán vào EC2 instance bằng cách thêm vào policy cho phép quyền truy cập vào S3.\nCập nhật IAM Role Truy cập vào giao diện quản trị dịch vụ IAM Click Roles. Tại ô tìm kiếm , điền SSM. Click vào role SSM-Role. Click Attach policies. Tại ô Search điền S3. Click chọn policy AmazonS3FullAccess. Click Attach policy. Trong thực tế chúng ta sẽ cấp quyền chặt chẽ hơn tới S3 bucket chỉ định. Trong khuôn khổ bài lab này chúng ta sử dụng policy AmazonS3FullAccess cho tiện dụng.\nTiếp theo chúng ta sẽ tiến hành tạo S3 bucket để lưu trữ session logs.\n"
+},
+{
+	"uri": "//localhost:1313/vi/3-containerization/3.1-development-env/",
+	"title": "Chuẩn bị Development Environment",
+	"tags": [],
+	"description": "",
+	"content": "Content Cài đặt Docker Desktop Thiết lập Git và Github repository Hướng dẫn clone dự án FE\u0026amp;BE và đẩy lên Github Repository "
 },
 {
 	"uri": "//localhost:1313/vi/2-prerequiste/2.1-createec2/",
@@ -21,21 +28,28 @@
 	"content": "Tổng quan Kiến trúc này mô tả một Serverless Web Application được xây dựng hoàn toàn trên nền tảng AWS, sử dụng các dịch vụ managed để tạo ra một ứng dụng có khả năng mở rộng cao, chi phí tối ưu và bảo mật tốt. Ứng dụng được thiết kế theo mô hình 3-tier architecture với frontend, backend và các dịch vụ hỗ trợ.\nCác thành phần chính trong kiến trúc User Access \u0026amp; Code Management GitHub: Quản lý mã nguồn và version control cho toàn bộ ứng dụng User: Người dùng cuối truy cập ứng dụng thông qua web browser Security \u0026amp; Network Layer (Lớp bảo mật và mạng) AWS Route 53 là dịch vụ DNS (Domain Name System) có khả năng mở rộng cao và độ tin cậy cao của AWS. Route 53 kết nối các yêu cầu của người dùng với cơ sở hạ tầng chạy trên AWS như EC2 instances, Elastic Load Balancers hoặc Amazon S3 buckets. Route 53 cũng có thể được sử dụng để định tuyến người dùng đến cơ sở hạ tầng bên ngoài AWS. AWS Application Load Balancer (ALB) hoạt động ở layer 7 của mô hình OSI (Application Layer) và có thể định tuyến traffic dựa trên nội dung của request. ALB hỗ trợ path-based routing và host-based routing, có thể phân phối traffic đến nhiều target groups khác nhau. ALB tích hợp tốt với các dịch vụ AWS khác như Auto Scaling, ECS, và Lambda AWS CloudFront là dịch vụ Content Delivery Network (CDN) toàn cầu giúp phân phối nội dung với độ trễ thấp và tốc độ truyền tải cao. CloudFront sử dụng mạng lưới các edge locations trên toàn thế giới để cache nội dung gần người dùng cuối nhất, giảm thiểu thời gian load trang và cải thiện trải nghiệm người dùng. AWS WAF (Web Application Firewall) là dịch vụ firewall ứng dụng web giúp bảo vệ ứng dụng khỏi các cuộc tấn công web phổ biến như SQL injection, cross-site scripting (XSS). WAF cho phép tạo các rule tùy chỉnh để filter, monitor và block traffic độc hại dựa trên các điều kiện như IP addresses, HTTP headers, HTTP body, hoặc URI strings. Application Layer (Lớp ứng dụng) Frontend Container Chạy trên port 80 Sử dụng Nginx làm web server Có thể chứa ứng dụng React, Angular hoặc Vue.js Port 4375 cho các kết nối nội bộ Backend Container Chạy trên port 4000 Sử dụng Express.js framework (Node.js) Xử lý business logic và API endpoints Kết nối với các dịch vụ AWS khác AWS Managed Services Amazon EC2 (Elastic Compute Cloud) cung cấp khả năng tính toán có thể mở rộng trong cloud. EC2 cho phép khởi chạy các máy chủ ảo (instances) với nhiều cấu hình khác nhau về CPU, memory, storage và network. Người dùng có thể chọn từ nhiều loại instance types được tối ưu hóa cho các workload khác nhau như compute-optimized, memory-optimized, storage-optimized. AWS KMS (Key Management Service) là dịch vụ quản lý khóa mã hóa được quản lý hoàn toàn, giúp tạo và kiểm soát các khóa mã hóa được sử dụng để mã hóa dữ liệu. KMS tích hợp với hầu hết các dịch vụ AWS khác để bảo vệ dữ liệu được lưu trữ trong các dịch vụ đó. KMS sử dụng Hardware Security Modules (HSMs) để bảo vệ tính bảo mật của khóa. Amazon CloudWatch là dịch vụ monitoring và observability được xây dựng cho DevOps engineers, developers, site reliability engineers (SREs) và IT managers. CloudWatch cung cấp dữ liệu và actionable insights để monitor các ứng dụng, hiểu và phản hồi với các thay đổi hiệu suất system-wide, tối ưu hóa việc sử dụng tài nguyên và có cái nhìn tổng thể về operational health. Amazon S3 (Simple Storage Service) là dịch vụ object storage được xây dựng để lưu trữ và truy xuất bất kỳ lượng dữ liệu nào từ bất cứ đâu. S3 cung cấp độ bền 99.999999999% (11 9\u0026rsquo;s) và lưu trữ dữ liệu cho hàng triệu ứng dụng cho các công ty trên toàn thế giới. S3 cung cấp các tính năng quản lý đơn giản để có thể tổ chức dữ liệu và cấu hình access controls tinh tế. Amazon SNS (Simple Notification Service) là dịch vụ messaging được quản lý hoàn toàn cho cả application-to-application (A2A) và application-to-person (A2P) communication. SNS cung cấp các chủ đề (topics) cho high-throughput, push-based, many-to-many messaging giữa các hệ thống phân tán, microservices và event-driven serverless applications. Database \u0026amp; Data Processing MongoDB: Cơ sở dữ liệu NoSQL để lưu trữ dữ liệu ứng dụng Kết nối với AWS ecosystem thông qua các managed services "
 },
 {
-	"uri": "//localhost:1313/vi/3-accessibilitytoinstances/3.1-public-instance/",
-	"title": "Kết nối đến máy chủ Public",
-	"tags": [],
-	"description": "",
-	"content": "\nTruy cập vào giao diện quản trị của dịch vụ EC2. Click chọn Public Linux Instance. Click Actions. Click Security. Click Modify IAM role. Tại trang Modify IAM role. Click chọn SSM-Role. Click Save. Bạn sẽ cần chờ khoảng 10 phút trước khi thực hiện bước tiếp theo. Thời gian này EC2 instance của chúng ta sẽ tự động đăng ký với Session Manager.\nTruy cập vào giao diện quản trị của dịch vụ AWS Systems Manager Kéo thanh trượt menu bên trái xuống dưới. Click Session Manager. Click Start Session. Sau đó chọn Public Linux Instance và click Start session để truy cập vào instance. Terminal sẽ xuất hiện trên trình duyệt. Kiểm tra với câu lệnh sudo tcpdump -nn port 22 và sudo tcpdump chúng ta sẽ thấy không có traffic của SSH mà chỉ có traffic HTTPS. Ở trên, chúng ta đã tạo kết nối vào public instance mà không cần mở cổng SSH 22, giúp cho việc bảo mật tốt hơn, tránh mọi sự tấn công tới cổng SSH.\nMột nhược điểm của cách làm trên là ta phải mở Security Group outbound ở cổng 443 ra ngoài internet. Vì là public instance nên có thể sẽ không vấn đề gì nhưng nếu bạn muốn bảo mật hơn nữa, bạn có thể khoá cổng 443 ra ngoài internet mà vẫn sử dụng được Session Manager. Chúng ta sẽ đi qua cách làm này ở phần private instance dưới đây.\nBạn có thể terminate để kết thúc session đang kết nối trước khi qua bước tiếp theo.\n"
-},
-{
-	"uri": "//localhost:1313/vi/3-accessibilitytoinstances/3.2-private-instance/3.2.1-enablevpcdns/",
+	"uri": "//localhost:1313/vi/3-containerization/3.2-create-dockercontainer/3.2.1-dockerfile-fe/",
 	"title": "Kích hoạt DNS hostnames",
 	"tags": [],
 	"description": "",
 	"content": "Kích hoạt tính năng DNS hostnames trên VPC. Để tạo được VPC Endpoint chúng ta sẽ cần bật tính năng DNS hostnames trên VPC. Truy cập đến giao diện quản trị của dịch vụ VPC\nClick Your VPCs.\nChọn Lab VPC.\nClick Actions.\nClick Edit DNS hostnames.\nClick Endpoint, sau đó click Create Endpoint.\nTại trang Edit DNS hostnames. Click chọn Enable. Click Save changes. "
 },
 {
-	"uri": "//localhost:1313/vi/3-accessibilitytoinstances/3.2-private-instance/3.2.2-createvpcendpoint/3.2.2.1-endpointssm/",
+	"uri": "//localhost:1313/vi/3-containerization/3.3-deloy-scripts/3.3.1-create-deloyscripts/",
+	"title": "Kích hoạt DNS hostnames",
+	"tags": [],
+	"description": "",
+	"content": "Kích hoạt tính năng DNS hostnames trên VPC. Để tạo được VPC Endpoint chúng ta sẽ cần bật tính năng DNS hostnames trên VPC. Truy cập đến giao diện quản trị của dịch vụ VPC\nClick Your VPCs.\nChọn Lab VPC.\nClick Actions.\nClick Edit DNS hostnames.\nClick Endpoint, sau đó click Create Endpoint.\nTại trang Edit DNS hostnames. Click chọn Enable. Click Save changes. "
+},
+{
+	"uri": "//localhost:1313/vi/3-containerization/3.2-create-dockercontainer/3.2.2-dockerfile-be/3.2.2.1-endpointssm/",
+	"title": "Tạo Endpoint ssm",
+	"tags": [],
+	"description": "",
+	"content": "Tạo VPC Endpoint SSM Truy cập đến giao diện quản trị của dịch vụ VPC Click Endpoints. Click Create endpoint. Tại trang Create endpoint. Tại mục Name tag điền SSM. Tại mục Service Category chọn AWS Services. Tại mục Service Name, Tại mục Service category chọn: AWS services Tại mục Service Name nhập: SSM sau đó chọn Service Name: com.amazonaws.ap-southeast-1.ssm. Tại cột Service Name, click chọn com.amazonaws.ap-southeast-1.ssm. Tại mục VPC, chọn Lab VPC. Chọn AZ đầu tiên, sau đó chọn subnet Lab Private Subnet. Kéo chuột xuống dưới. Tại mục Security Group, chọn Security group SG VPC Endpoint mà chúng ta đã tạo trước đó. Tại mục Policy, chọn Full access Kéo chuột xuống dưới cùng. Click Create endpoint. Chúng ta đã tạo xong VPC Interface Endpoint cho SSM. "
+},
+{
+	"uri": "//localhost:1313/vi/3-containerization/3.3-deloy-scripts/3.3.2-configure-env/3.2.2.1-endpointssm/",
 	"title": "Tạo Endpoint ssm",
 	"tags": [],
 	"description": "",
@@ -60,7 +74,21 @@
 	"title": "Các bước chuẩn bị",
 	"tags": [],
 	"description": "",
-	"content": "\rBạn cần tạo sẵn 1 Linux instance thuộc public subnet và 1 Window instance thuộc private subnet để thực hiện bài thực hành này.\nĐể tìm hiểu cách tạo các EC2 instance và VPC với public/private subnet các bạn có thể tham khảo bài lab :\nGiới thiệu về Amazon EC2 Làm việc với Amazon VPC Để sử dụng System Manager để quản lý window instance nói riêng và các instance nói chung của chúng ta trên AWS, ta cần phải cung cấp quyền cho các instance của chúng ta có thể làm việc với System Manager.Trong phần chuẩn bị này, chúng ta cũng sẽ tiến hành tạo IAM Role để cấp quyền cho các instance có thể làm việc với System Manager.\nNội dung Chuẩn bị VPC và EC2 Instance Tạo IAM Role Security Groups \u0026amp; Network setup "
+	"content": "\rBạn cần tạo sẵn 1 Linux instance thuộc public subnet và 1 Window instance thuộc private subnet để thực hiện bài thực hành này.\nĐể tìm hiểu cách tạo các EC2 instance và VPC với public/private subnet các bạn có thể tham khảo bài lab :\nGiới thiệu về Amazon EC2 Làm việc với Amazon VPC Để sử dụng System Manager để quản lý window instance nói riêng và các instance nói chung của chúng ta trên AWS, ta cần phải cung cấp quyền cho các instance của chúng ta có thể làm việc với System Manager.Trong phần chuẩn bị này, chúng ta cũng sẽ tiến hành tạo IAM Role để cấp quyền cho các instance có thể làm việc với System Manager.\nNội dung Chuẩn bị VPC và EC2 Instance Tạo IAM Role Thiết lập bảo mật và mạng "
+},
+{
+	"uri": "//localhost:1313/vi/3-containerization/3.1-development-env/3.1.1-install-docker/",
+	"title": "Cài đặt Docker Desktop",
+	"tags": [],
+	"description": "",
+	"content": "Tổng quan về Docker Docker là một nền tảng cho developers và sysadmin để develop, deploy và run application với container. Nó cho phép tạo các môi trường độc lập và tách biệt để khởi chạy và phát triển ứng dụng và môi trường này được gọi là container. Khi cần deploy lên bất kỳ server nào chỉ cần run container của Docker thì application của bạn sẽ được khởi chạy ngay lập tức.\nCác thành phần chính của Docker\nNguyên tắc hoạt động của Docker\nContainerization là gì?\nContainerization là một công nghệ ảo hoá, giúp giải quyết vấn đề này bằng cách đóng gói ứng dụng và tất cả các phụ thuộc (dependencies) của nó (như thư viện, cấu hình) vào một đơn vị độc lập gọi là container. Container này đảm bảo rằng phần mềm sẽ chạy ổn định và nhất quán trên bất kỳ môi trường nào, dù là trên máy tính cá nhân của Developer, Test Server, hay môi trường Production trên cloud.\nTrước khi có container: Developer viết một ứng dụng trên máy tính cá nhân sử dụng thư viện Python phiên bản 3.6. Sau khi kiểm thử thành công, anh ấy triển khai ứng dụng này lên máy chủ Production, nhưng máy chủ này lại đang chạy Python phiên bản 3.7. Sự khác biệt nhỏ này đã gây ra lỗi do một số thư viện không tương thích với Python 3.7.\nVới container: Developer có thể đóng gói ứng dụng của mình cùng với tất cả các thư viện, bao gồm phiên bản Python 3.6 mà ứng dụng cần, vào một container. Khi container này được triển khai trên bất kỳ môi trường nào (local, test, production), ứng dụng vẫn sẽ hoạt động chính xác như khi nó được kiểm thử trên máy tính cá nhân.\nVai trò của Containerization\nConsistency (Nhất quán): Đảm bảo rằng ứng dụng được đóng gói trong container sẽ hoạt động giống nhau trên mọi môi trường, dù là trên máy tính của developer, test server, hay môi trường production.\nPortability (Di động): container là các gói phần mềm nhẹ có thể dễ dàng chuyển từ hệ thống này sang hệ thống khác mà không gặp vấn đề về tương thích.\nScalability (Khả năng mở rộng): Containers có thể được khởi động hoặc dừng nhanh chóng, cho phép các ứng dụng dễ dàng mở rộng hoặc thu hẹp tùy theo nhu cầu sử dụng thực tế.\nEfficiency (Hiệu quả): Container chia sẻ kernel của hệ điều hành chủ, không giống như các máy ảo truyền thống phải có một hệ điều hành đầy đủ riêng. Điều này làm cho container tốn ít tài nguyên hơn, khởi động nhanh hơn và có ít chi phí quản lý hơn.\nIsolation (Cô lập): Container đảm bảo rằng các ứng dụng được cô lập với nhau, tăng cường bảo mật. Nếu một ứng dụng bị tấn công, sự cố này không ảnh hưởng đến các ứng dụng khác.\nHướng dẫn cài đặt và sử dụng Docker Hướng dẫn này chỉ dành cho hệ điều hành Windows.\nNếu bạn đang sử dụng macOS hoặc một hệ điều hành nào khác, vui lòng tìm tài liệu hướng dẫn phù hợp, vì các bước cài đặt và yêu cầu hệ thống có thể khác biệt đáng kể.\nKiểm tra lại hệ điều hành của bạn trước khi tiếp tục để tránh lỗi hoặc cài đặt không tương thích.\nTải ứng dụng Docker Desktop tại đường link, lưu ý nếu máy tính của bạn dùng chip ARM thì chúng ta sử dụng phiên bản dưới, nếu sử dụng chip x86/x64 của Intel và AMD thì tải phiên bản trên. Double click vào file Docker Desktop Installer.exe đã download ở bước 1 để bắt đầu cài đặt. Mặc định, Docker Desktop được cài đặt tại đường dẫn C:\\Program Files\\Docker\\Docker. và sau đó nhấn OK để tải Sau khi hoàn tất cài đặt thì nhấn Close and Restart Vào CMD và gõ wsl nếu xuất hiện tương tự như hình ảnh bên dưới thì bạn đã thành công "
+},
+{
+	"uri": "//localhost:1313/vi/3-containerization/3.1-development-env/3.1.3-clone-project/",
+	"title": "Hướng dẫn clone dự án FE&amp;BE và đẩy lên Github Repository",
+	"tags": [],
+	"description": "",
+	"content": "Sau khi bạn đã có 2 repository trong tài khoản GitHub của bạn, bạn giúp tôi tải phần mềm sau: Visual Studio Code và GitHub Desktop để thuận lợi trong việc clone dự án và đẩy lên GitHub Repository diễn ra nhanh hơn thì sau đây tôi sẽ giới thiệu sơ qua về 2 phần mềm đó\nVisual Studio Code là gì\nVisual Studio Code (VS Code) là một trình soạn thảo mã nguồn miễn phí, đa nền tảng, được phát triển bởi Microsoft. Nó đã nhanh chóng trở thành một trong những trình soạn thảo phổ biến nhất dành cho các nhà phát triển, nhờ giao diện thân thiện, tính năng mạnh mẽ và khả năng mở rộng cao.\nLý do nên chọn Visual Studio Code?\nMiễn phí và mã nguồn mở: VS Code hoàn toàn miễn phí và được cấp phép theo giấy phép MIT. Điều này nghĩa là bạn có thể sử dụng và sửa đổi nó tự do mà không phải trả bất kỳ khoản phí nào. Bạn thậm chí có thể đóng góp vào dự án bằng cách sửa lỗi, thêm tính năng mới hoặc dịch thuật. Điều này đã thu hút rất nhiều lập trình viên và đóng góp vào sự phát triển mạnh mẽ của VS Code. Đa nền tảng: VS Code có sẵn trên Windows, macOS và Linux, cho phép bạn sử dụng nó trên bất kỳ hệ điều hành nào. Điều này mang lại sự thuận tiện cho các lập trình viên khi họ có thể làm việc trên nhiều thiết bị khác nhau mà không cần thay đổi môi trường phát triển. Giao diện thân thiện: VS Code có giao diện đơn giản, dễ sử dụng và trực quan, phù hợp cho cả người mới bắt đầu và các nhà phát triển có kinh nghiệm. Hỗ trợ nhiều ngôn ngữ lập trình: VS Code hỗ trợ hơn 30 ngôn ngữ lập trình phổ biến, bao gồm JavaScript, Python, Java, C++, C#, Golang, PHP và nhiều hơn nữa. Bạn có thể sử dụng VS Code để viết mã cho bất kỳ dự án nào, bất kể ngôn ngữ lập trình nào bạn đang sử dụng. VS Code cung cấp hỗ trợ cú pháp, gợi ý mã thông minh và các tính năng gỡ lỗi cho mỗi ngôn ngữ, giúp bạn viết mã hiệu quả và dễ dàng hơn.Ví dụ: Đối với JavaScript: VS Code cung cấp hỗ trợ hoàn chỉnh cho JavaScript, bao gồm IntelliSense (gợi ý mã thông minh), hỗ trợ gỡ lỗi tích hợp, hỗ trợ TypeScript. GitHub Desktop là gì ?\n"
 },
 {
 	"uri": "//localhost:1313/vi/2-prerequiste/2.3-sgandnetwork/",
@@ -70,7 +98,14 @@
 	"content": "Nội dung Tạo nhóm bảo mật Thiết lập mang "
 },
 {
-	"uri": "//localhost:1313/vi/3-accessibilitytoinstances/3.2-private-instance/3.2.2-createvpcendpoint/3.2.2.2-endpointssmmessages/",
+	"uri": "//localhost:1313/vi/3-containerization/3.2-create-dockercontainer/3.2.2-dockerfile-be/3.2.2.2-endpointssmmessages/",
+	"title": "Tạo Endpoint ssmmessages",
+	"tags": [],
+	"description": "",
+	"content": "Tạo VPC Endpoint SSMMESSAGES Truy cập đến giao diện quản trị của dịch vụ VPC Click Endpoints. Click Create endpoint. Tại trang Create endpoint. Tại mục Name tag điền SSMMESSAGES. Tại mục Service Category chọn AWS Services. Tại mục Service Name, Tại mục Service category chọn: AWS services Tại mục Service Name nhập: ssmmessages sau đó chọn Service Name: com.amazonaws.ap-southeast-1.ssmmessages. Tại cột Service Name, click chọn com.amazonaws.ap-southeast-1.ssmmessages. Tại mục VPC, chọn Lab VPC. Chọn AZ đầu tiên, sau đó chọn subnet Lab Private Subnet. Kéo chuột xuống dưới. Tại mục Security Group, chọn Security group SG VPC Endpoint mà chúng ta đã tạo trước đó. Tại mục Policy, chọn Full access Kéo chuột xuống dưới cùng. Click Create endpoint. Chúng ta đã tạo xong VPC Interface Endpoint SSMMESSAGES. "
+},
+{
+	"uri": "//localhost:1313/vi/3-containerization/3.3-deloy-scripts/3.3.2-configure-env/3.2.2.2-endpointssmmessages/",
 	"title": "Tạo Endpoint ssmmessages",
 	"tags": [],
 	"description": "",
@@ -84,14 +119,21 @@
 	"content": "Tạo IAM Role Trong bước này chúng ta sẽ tiến hành tạo IAM Role. Trong IAM Role này sẽ được gán policy AmazonSSMManagedInstanceCore, đây là policy cho phép máy chủ EC2 có thể giao tiếp với Session Manager.\nTruy cập vào giao diện quản trị dịch vụ IAM Ở thanh điều hướng bên trái, click Roles. Click Create role. Click AWS service và click EC2. Click Next: Permissions. Trong ô Search, điền AmazonSSMManagedInstanceCore và ấn phím Enter để tìm kiếm policy này. Click chọn policy AmazonSSMManagedInstanceCore. Click Next: Tags. Click Next: Review. Đặt tên cho Role là SSM-Role ở Role Name Click Create Role . Tiếp theo chúng ta sẽ thực hiện kết nối đến các máy chủ EC2 chúng ta đã tạo bằng Session Manager.\n"
 },
 {
-	"uri": "//localhost:1313/vi/3-accessibilitytoinstances/3.2-private-instance/",
+	"uri": "//localhost:1313/vi/3-containerization/3.2-create-dockercontainer/",
 	"title": "Tạo kết nối đến máy chủ EC2 Private",
 	"tags": [],
 	"description": "",
 	"content": "Đối với Windows instance nằm trong private subnet, không có public IP, không có internet gateway nên không thể đi ra ngoài internet.\nVới loại instance này, cách làm truyền thống là ta sẽ sử dụng kỹ thuật Bastion host tốn nhiều chi phí và công sức, nhưng ở đây chúng ta sẽ sử dụng Session Manager với loại này.\nCơ bản là private instance vẫn phải mở cổng TCP 443 tới System Manager, nhưng không cho kết nối đó đi ra ngoài internet mà chỉ cho đi trong chính VPC của mình, nên đảm bảo được vấn đề bảo mật.\nĐể làm được điều đó, ta phải đưa endpoint của System Manager vào trong VPC, nghĩa là sử dụng VPC interface endpoint:\nVPC interface endpoint được gắn với subnet nên cách làm này không những với private subnet mà còn có thể làm với public subnet, nghĩa là với public subnet, bạn hoàn toàn có thể không cho TCP 443 đi ra ngoài internet.\nNội dung: Kích hoạt DNS hostnames Tạo VPC Endpoint Kết nối Private Instance "
 },
 {
-	"uri": "//localhost:1313/vi/4-s3log/4.2-creates3bucket/",
+	"uri": "//localhost:1313/vi/3-containerization/3.3-deloy-scripts/",
+	"title": "Tạo kết nối đến máy chủ EC2 Private",
+	"tags": [],
+	"description": "",
+	"content": "Đối với Windows instance nằm trong private subnet, không có public IP, không có internet gateway nên không thể đi ra ngoài internet.\nVới loại instance này, cách làm truyền thống là ta sẽ sử dụng kỹ thuật Bastion host tốn nhiều chi phí và công sức, nhưng ở đây chúng ta sẽ sử dụng Session Manager với loại này.\nCơ bản là private instance vẫn phải mở cổng TCP 443 tới System Manager, nhưng không cho kết nối đó đi ra ngoài internet mà chỉ cho đi trong chính VPC của mình, nên đảm bảo được vấn đề bảo mật.\nĐể làm được điều đó, ta phải đưa endpoint của System Manager vào trong VPC, nghĩa là sử dụng VPC interface endpoint:\nVPC interface endpoint được gắn với subnet nên cách làm này không những với private subnet mà còn có thể làm với public subnet, nghĩa là với public subnet, bạn hoàn toàn có thể không cho TCP 443 đi ra ngoài internet.\nNội dung: Kích hoạt DNS hostnames Tạo VPC Endpoint Kết nối Private Instance "
+},
+{
+	"uri": "//localhost:1313/vi/4-infrastructure/4.2-creates3bucket/",
 	"title": "Tạo S3 Bucket",
 	"tags": [],
 	"description": "",
@@ -112,63 +154,91 @@
 	"content": "Tạo subnet Click Subnets. Click Create subnet. Tại trang Create subnet. Tại mục VPC ID click chọn Mern-stack VPC. Tại mục Subnet name điền Mern-stack Subnet. Tại mục Availability Zone chọn Availability zone đầu tiên. Tại mục IPv4 CIRD block điền 10.0.0.0/28. Kéo xuống cuối trang , click Create subnet.\nClick chọn Mern-stack Subnet.\nClick Actions. Click Edit subnet settings. Click chọn Enable auto-assign public IPv4 address. Click Save. "
 },
 {
-	"uri": "//localhost:1313/vi/3-accessibilitytoinstances/3.2-private-instance/3.2.2-createvpcendpoint/",
+	"uri": "//localhost:1313/vi/3-containerization/3.2-create-dockercontainer/3.2.2-dockerfile-be/",
 	"title": "Tạo VPC Endpoint",
 	"tags": [],
 	"description": "",
 	"content": "Tạo VPC Endpoint SSM Chúng ta sẽ tạo 3 interface endpoint yêu cầu bởi Session Manager: Interface endpoint: com.amazonaws.region.ssm com.amazonaws.region.ec2messages com.amazonaws.region.ssmmessages Bạn có thể tham khảo thêm tại đây\nNội dung: Tạo Endpoint ssm Tạo Endpoint ssmmessages Tạo Endpoint ec2messages "
 },
 {
+	"uri": "//localhost:1313/vi/3-containerization/3.3-deloy-scripts/3.3.2-configure-env/",
+	"title": "Tạo VPC Endpoint",
+	"tags": [],
+	"description": "",
+	"content": "Tạo VPC Endpoint SSM Chúng ta sẽ tạo 3 interface endpoint yêu cầu bởi Session Manager: Interface endpoint: com.amazonaws.region.ssm com.amazonaws.region.ec2messages com.amazonaws.region.ssmmessages Bạn có thể tham khảo thêm tại đây\nNội dung: Tạo Endpoint ssm Tạo Endpoint ssmmessages Tạo Endpoint ec2messages "
+},
+{
+	"uri": "//localhost:1313/vi/3-containerization/3.1-development-env/3.1.2-setup-git/",
+	"title": "Thiết lập Git và Github Repository",
+	"tags": [],
+	"description": "",
+	"content": "Tổng quan về Git và Github Repository GitHub là một mạng xã hội đặc biệt dành cho lập trình viên, là một hệ thống quản lý dự án, lưu trữ source code, theo dõi và cộng tác trong các dự án phần mềm.Ngoài ra, GitHub là một dịch vụ nổi tiếng cung cấp kho lưu trữ mã nguồn Git cho các dự án phần mềm. Github có đầy đủ những tính năng của Git, ngoài ra nó còn bổ sung những tính năng về social để các developer tương tác với nhau.\nGit là một hệ thống quản lý phiên bản phân tán (Distributed Version Control System – DVCS), nó là một trong những hệ thống quản lý phiên bản phân tán phổ biến nhất hiện nay. Git cung cấp cho mỗi lập trình viên kho lưu trữ (repository) riêng chứa toàn bộ lịch sử thay đổi.\nSự khác biệt giữa Git và GitHub\nGit là hệ thống kiểm soát phiên bản mã nguồn mở được sử dụng phổ biến cho các dự án lớn và nhỏ.\nGitHub là Git Server, nơi mọi người chia sẻ và cộng tác trên mã nguồn họ tạo ra. GitHub sử dụng hệ thống kiểm soát phiên bản là Git. GitHub đơn giản hoá việc sử dụng Git mà không cần tới giao diện dòng lệnh\nVì sao nên sử dụng GitHub?\nSử dụng phổ biến: Trong số các Github Server thì GitHub được coi là nền tảng phổ biến nhất và được ưa thích nhất với 4 triệu tổ chức và hơn 100 triệu nhà phát triển. Lý do ngoài việc sử dụng dễ dàng thì còn vì những tính năng như lưu trữ mã nguồn miễn phí, kiểm soát phiên bản phân tán, tạo project và tích hợp các nền tảng CI/CD phổ biến như Travis CI và Jenkins. Cộng đồng đông đảo: GitHub có một cộng đồng các nhà phát triển lớn mạnh và năng động, khiến nó trở thành một nơi tuyệt vời để khám phá và đóng góp cho các dự án nguồn mở. Bảo mật: Github cung cấp các tính năng như quét mã nguồn và phân tích dependency, giúp cải thiện tính bảo mật của mã nguồn. Lưu trữ mã: GitHub cung cấp nền tảng để lưu trữ mã nguồn của bạn và cộng đồng nhà phát triển toàn cầu có thể truy cập được chúng một cách dễ dàng. Hợp tác: Github tạo điều kiện cho sự hợp tác giữa các nhà phát triển bằng cách cho phép nhiều người có thể đồng thời đóng góp trên cùng một dự án. Cách sử dụng GitHub\nTạo một tài khoản GitHub Nếu bạn chưa có tài khoản, hãy truy cập trang chủ của GitHub và đăng ký tài khoản miễn phí. Sau khi nhập email và password, Github sẽ gửi cho bạn một email xác minh. Bạn cần mở email và click vào đường dẫn xác minh trong email để xác nhận địa chỉ email của bạn. Sau khi tài khoản của bạn được xác minh, bạn có thể khám phá GitHub bằng cách trải nghiệm các tính năng của Github như duyệt qua các repository và các dự án công khai để hiểu những gì có sẵn.\nCài đặt và cấu hình Git Nếu máy bạn chưa cài Git, bạn có thể làm theo hướng dẫn cài đặt Git và chọn cách phù hợp với hệ điều hành trên máy tính của bạn. Để kiểm tra, phiên bản Git bạn đã cài, bạn cần chạy lệnh Làm việc với repository\nTạo mới repository Khi tạo mới repository, bạn cần phải đặt tên không trùng với tên của repository nào đã có trong danh sách repository của bạn và thêm mô tả cho repository. Mặc định, GitHub sẽ tạo repository công khai. Bạn có thể sửa chế độ của repository trước lúc tạo hoặc sau khi tạo thành công. Sau khi bạn đã truy cập được chỗ tạo mới repository bạn giúp tôi tạo 2 repository với tên như sau: AWS-FE và AWS-BE\nSau khi bạn đã hoàn tất việc tạo 2 repository, bạn ra trang Home -\u0026gt; Avatar sát bên tay phải -\u0026gt; Your Repositories Nễu xuất hiện 2 repository bạn vừa mới tạo thì chúc mừng bạn đã tạo thành công "
+},
+{
 	"uri": "//localhost:1313/vi/2-prerequiste/2.3-sgandnetwork/2.3.2-setupnetwork/",
 	"title": "Thiết lập mạng",
 	"tags": [],
 	"description": "",
-	"content": "Tạo NAT Gateway Tổng quan\nNAT Gateway cho phép các instances trong private subnet kết nối ra internet Đảm bảo kết nối một chiều từ trong ra ngoài, tăng tính bảo mật Cần có Elastic IP và đặt NAT Gateway trong public subnet Triển khai NAT Gateway Truy cập VPC Dashboard Chọn NAT Gateways Chọn Create NAT gateway Cấu hình NAT Gateway Name: Nhập mernstack-gateway-public Subnet: Chọn Mern-stack Subnet Connectivity type: Chọn Public Elastic IP allocation ID: Chọn Elastic IP vừa tạo Chọn Create NAT gateway "
+	"content": "Tạo NAT Gateway Tổng quan\nNAT Gateway cho phép các instances trong private subnet kết nối ra internet Đảm bảo kết nối một chiều từ trong ra ngoài, tăng tính bảo mật Cần có Elastic IP và đặt NAT Gateway trong public subnet Triển khai NAT Gateway Truy cập VPC Dashboard Chọn NAT Gateways Chọn Create NAT gateway Cấu hình NAT Gateway Name: Nhập mernstack-gateway-public Subnet: Chọn Mern-stack Subnet Connectivity type: Chọn Public Elastic IP allocation ID: Chọn Elastic IP vừa tạo Chọn Create NAT gateway Xác nhận tạo thành công NAT Gateway Tạo Internet Gateway Tổng quan\nInternet Gateway (IGW) là thành phần VPC cho phép kết nối internet Cung cấp điểm kết nối giữa VPC và internet Hỗ trợ giao tiếp hai chiều cho các tài nguyên trong VPC Triển khai Internet Gateway Truy cập giao diện VPC Chọn Internet Gateways từ menu bên trái Click vào Create internet gateway Cấu hình Internet Gateway Tại Name tag, nhập mernstack-igw Click Create internet gateway Xác nhận tạo Internet Gateway thành công Kết nối với VPC\nGắn Internet Gateway vào VPC Click Actions Chọn Attach to VPC Chọn Mern-stack VPC từ danh sách (VPC ID sẽ tự động điền) Click Attach internet gateway Sau khi gắn thành công: Tạo Route Table Tổng quan\nRoute Table là thành phần định tuyến lưu lượng mạng trong VPC Xác định đường đi cho các gói tin giữa các subnet và internet Cho phép kiểm soát luồng dữ liệu vào/ra VPC Triển khai Route Table Truy cập VPC Dashboard\nChọn Route Tables từ menu bên trái Click vào Create route table Cấu hình Route Table\nName: Nhập mernstack-route-tables VPC: Chọn Mern-stack VPC Chọn Create route table Xác nhận tạo Route Table thành công Cấu hình định tuyến\nThêm route cho Internet Gateway Chọn Actions Chọn Edit routes Cấu hình route mới Chọn Add route Destination: Nhập 0.0.0.0/0 (đại diện cho internet) Target: Chọn mernstack-igw và chọn IGW đã tạo Target: Chọn mernstack-gateway-public và chọn NAT Gateway đã tạo Click Save changes Liên kết với Subnet\nThiết lập subnet associations Chọn tab Subnet associations Click Edit subnet associations Chọn các subnet Chọn Subnet: Mern-stack Subnet Click Save associations Xác nhận cấu hình subnet associations thành công "
 },
 {
-	"uri": "//localhost:1313/vi/3-accessibilitytoinstances/3.2-private-instance/3.2.3-connectec2/",
+	"uri": "//localhost:1313/vi/3-containerization/3.2-create-dockercontainer/3.2.3-test-containers/",
 	"title": "Kết nối EC2 Private",
 	"tags": [],
 	"description": "",
 	"content": "Gán IAM role và restart EC2 instance. Truy cập giao diện quản trị dịch vụ EC2 Click chọn Private Windows Instance. Click Actions. Click Security. Click Modify IAM Role. Tại trang Modify IAM Role. Tại mục IAM role, chọn SSM-Role. Click Save. Click chọn Private Windows Instance. Click Instance state. Click Reboot instance để thực hiện restart, sau đó click Reboot để xác nhận. Bạn hãy đợi 5 phút trước khi làm bước tiếp theo nhé.\nKết nối tới máy chủ private EC2 instance. Truy cập vào giao diện quản trị dịch vụ System Manager - Session Manager Click Start session. Click chọn Private Windows Instance. Click Start session. Gõ lệnh ipconfig để kiểm tra thông tin địa chỉ IP của Private Windows Instance như dưới đây. "
 },
 {
-	"uri": "//localhost:1313/vi/3-accessibilitytoinstances/3.2-private-instance/3.2.2-createvpcendpoint/3.2.2.3-endpointec2messages/",
+	"uri": "//localhost:1313/vi/3-containerization/3.3-deloy-scripts/3.3.3-setup-endpoints/",
+	"title": "Kết nối EC2 Private",
+	"tags": [],
+	"description": "",
+	"content": "Gán IAM role và restart EC2 instance. Truy cập giao diện quản trị dịch vụ EC2 Click chọn Private Windows Instance. Click Actions. Click Security. Click Modify IAM Role. Tại trang Modify IAM Role. Tại mục IAM role, chọn SSM-Role. Click Save. Click chọn Private Windows Instance. Click Instance state. Click Reboot instance để thực hiện restart, sau đó click Reboot để xác nhận. Bạn hãy đợi 5 phút trước khi làm bước tiếp theo nhé.\nKết nối tới máy chủ private EC2 instance. Truy cập vào giao diện quản trị dịch vụ System Manager - Session Manager Click Start session. Click chọn Private Windows Instance. Click Start session. Gõ lệnh ipconfig để kiểm tra thông tin địa chỉ IP của Private Windows Instance như dưới đây. "
+},
+{
+	"uri": "//localhost:1313/vi/3-containerization/3.2-create-dockercontainer/3.2.2-dockerfile-be/3.2.2.3-endpointec2messages/",
 	"title": "Tạo Endpoint ec2messages",
 	"tags": [],
 	"description": "",
 	"content": "Tạo VPC Endpoint EC2MESSAGES Truy cập đến giao diện quản trị của dịch vụ VPC Click Endpoints. Click Create endpoint. Tại trang Create endpoint. Tại mục Name tag điền SSMMESSAGES. Tại mục Service Category chọn AWS Services. Tại mục Service Name, Tại mục Service category chọn: AWS services Tại mục Service Name nhập: ec2 sau đó chọn Service Name: com.amazonaws.ap-southeast-1.ec2messages. Tại cột Service Name, click chọn com.amazonaws.ap-southeast-1.ec2messages. Tại mục VPC, chọn Lab VPC. Chọn AZ đầu tiên, sau đó chọn subnet Lab Private Subnet. Kéo chuột xuống dưới. Tại mục Security Group, chọn Security group SG VPC Endpoint mà chúng ta đã tạo trước đó. Tại mục Policy, chọn Full access Kéo chuột xuống dưới cùng. Click Create endpoint. Chúng ta đã tạo xong VPC Interface Endpoint EC2MESSAGES.\nĐảm bảo 3 endpoint cần thiết đã được tạo như hình dưới.\n"
 },
 {
-	"uri": "//localhost:1313/vi/3-accessibilitytoinstances/",
-	"title": "Tạo kết nối đến máy chủ EC2",
+	"uri": "//localhost:1313/vi/3-containerization/3.3-deloy-scripts/3.3.2-configure-env/3.2.2.3-endpointec2messages/",
+	"title": "Tạo Endpoint ec2messages",
 	"tags": [],
 	"description": "",
-	"content": "Trong bước này, chúng ta sẽ thực hiện tạo kết nối đến các máy chủ EC2 của chúng ta, nằm trong cả public và private subnet.\nNội dung 3.1. Tạo Kết nối đến máy chủ EC2 Public 3.2. Tạo Kết nối đến máy chủ EC2 Private\n"
+	"content": "Tạo VPC Endpoint EC2MESSAGES Truy cập đến giao diện quản trị của dịch vụ VPC Click Endpoints. Click Create endpoint. Tại trang Create endpoint. Tại mục Name tag điền SSMMESSAGES. Tại mục Service Category chọn AWS Services. Tại mục Service Name, Tại mục Service category chọn: AWS services Tại mục Service Name nhập: ec2 sau đó chọn Service Name: com.amazonaws.ap-southeast-1.ec2messages. Tại cột Service Name, click chọn com.amazonaws.ap-southeast-1.ec2messages. Tại mục VPC, chọn Lab VPC. Chọn AZ đầu tiên, sau đó chọn subnet Lab Private Subnet. Kéo chuột xuống dưới. Tại mục Security Group, chọn Security group SG VPC Endpoint mà chúng ta đã tạo trước đó. Tại mục Policy, chọn Full access Kéo chuột xuống dưới cùng. Click Create endpoint. Chúng ta đã tạo xong VPC Interface Endpoint EC2MESSAGES.\nĐảm bảo 3 endpoint cần thiết đã được tạo như hình dưới.\n"
 },
 {
-	"uri": "//localhost:1313/vi/4-s3log/4.3-creategwes3/",
+	"uri": "//localhost:1313/vi/4-infrastructure/4.3-creategwes3/",
 	"title": "Tạo S3 Gateway endpoint",
 	"tags": [],
 	"description": "",
 	"content": " Truy cập vào giao diện quản trị dịch vụ VPC Click Endpoints. Click Create endpoint. Tại trang Create endpoint. Tại mục Name tag điền S3GW. Tại mục Service Category click chọn AWS services. Tại ô tìm kiếm điền S3, sau đó chọn com.amazonaws.[region].s3 Tại mục Services chọn com.amazonaws.[region].s3 có Type là Gateway. Tại mục VPC , chọn Lab VPC. Tại mục Route tables, chọn cả 2 route table. Kéo chuột xuống dưới cùng, click Create endpoint. Bước tiếp theo chúng ta sẽ tiến hành cấu hình Session Manager để có thể lưu trữ các session logs tới S3 bucket chúng ta đã tạo.\n"
 },
 {
-	"uri": "//localhost:1313/vi/4-s3log/",
+	"uri": "//localhost:1313/vi/3-containerization/",
+	"title": "Thiết lập và Containerization",
+	"tags": [],
+	"description": "",
+	"content": "Nội dung 3.1. Chuẩn bị Development Environment 3.2. Tạo Docker Container 3.3. Chuẩn bị Deploy Scripts\n"
+},
+{
+	"uri": "//localhost:1313/vi/4-infrastructure/",
 	"title": "Quản lý session logs",
 	"tags": [],
 	"description": "",
 	"content": "Với Session Manager chúng ta có thể xem được lịch sử các kết nối tới các instance thông qua Session history. Tuy nhiên chúng ta chưa xem được chi tiết các câu lệnh được sử dụng.\nTrong phần này chúng ta sẽ tiến hành tạo S3 bucket và thực hiện cấu hình lưu trữ các session logs để xem được chi tiết các câu lệnh được sử dụng trong session.\nNội dung: Cập nhật IAM Role Tạo S3 Bucket Tạo S3 Gateway endpoint Cấu hình Session logs "
 },
 {
-	"uri": "//localhost:1313/vi/4-s3log/4.4-configsessionlogs/",
+	"uri": "//localhost:1313/vi/4-infrastructure/4.4-configsessionlogs/",
 	"title": "Theo dõi session logs",
 	"tags": [],
 	"description": "",
 	"content": "Theo dõi session logs Truy cập giao diện quản trị dịch vụ System Manager - Session Manager Click tab Preferences. Click Edit. Kéo chuột xuống phía dưới, tại mục S3 logging, click chọn Enable. Bỏ chọn Allow only encrypted S3 buckets. Click chọn Choose a bucket name from the list. Chọn S3 bucket bạn đã tạo. Kéo chuột xuống phía dưới, click Save để lưu cấu hình.\nTruy cập giao diện quản trị dịch vụ System Manager - Session Manager\nClick Start session. Click chọn Private Windows Instance. Click Start session. Gõ lệnh ipconfig. Gõ lệnh hostname. Click Terminate để thoát session, click Terminate 1 lần nữa để xác nhận. Kiểm tra Session logs trong S3 Truy cập vào giao diện quản trị dịch vụ S3 Click vào tên S3 bucket chúng ta đã tạo cho bài lab. Click vào tên file sessions log Tại trang chi tiết objects , click Open. File logs sẽ được mở ở 1 tab mới trên trình duyệt.Bạn có thể xem các câu lệnh đã được lưu trữ lại trong session logs. "
 },
 {
-	"uri": "//localhost:1313/vi/5-portfwd/",
+	"uri": "//localhost:1313/vi/5-security/",
 	"title": "Port Forwarding",
 	"tags": [],
 	"description": "",
@@ -182,7 +252,7 @@
 	"content": " Truy cập giao diện quản trị dịch vụ EC2 Click Instances. Click Launch instances. Name: Nhập Mern-stack EC2\nTrong bước chọn AMI\nChọn Quick Start Chọn Amazon Linux AMI: chọn Amazon Linux 2 AMI Pro Tip:\nAmazon Linux 2 AMI được AWS cập nhật thường xuyên với các bản vá bảo mật và cải tiến hiệu suất. Sử dụng AMI này giúp bạn có một nền tảng ổn định và bảo mật cho các ứng dụng của mình.\nTrong phần key pair Click chọn Create key pair. Chọn và điền thông tin như trên hình Security Note\nKey pair là thành phần quan trọng để xác thực khi kết nối đến EC2 instance. Lưu trữ file .pem ở nơi an toàn và không chia sẻ với người khác. Mất key pair có thể dẫn đến việc không thể truy cập vào instance của bạn. Tiếp theo, chúng ta thực hiện cấu hình network cho instance Tại mục Network chọn Mern-stack VPC. Tại mục Subnet chọn Mern-stack Subnet. Tại mục Auto-assign Public IP chọn Use subnet setting (Enable) Kiểm tra lại và chọn Launch instance\nHoàn thành khởi tạo instance. Tiến hành xem chi tiết instance bằng cách chọn View all instance\nĐợi khoảng 5 phút sau khi khởi tạo, Status check chuyển sang 2/2 check passed và trạng thái instance là Running Pro Tip: Status check “2/2 checks passed” xác nhận rằng cả kiểm tra hệ thống (do AWS thực hiện) và kiểm tra instance (do hệ điều hành thực hiện) đều thành công. Điều này đảm bảo instance của bạn đã sẵn sàng để sử dụng.\n"
 },
 {
-	"uri": "//localhost:1313/vi/6-cleanup/",
+	"uri": "//localhost:1313/vi/7-cleanup/",
 	"title": "Dọn dẹp tài nguyên  ",
 	"tags": [],
 	"description": "",

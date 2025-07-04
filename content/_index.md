@@ -55,8 +55,8 @@ This workshop guides you through building a complete containerized web applicati
 
 1.  [Introduction](1-introduce/)
 2.  [Prerequisites](2-Prerequiste/)
-3.  [Application Containerization](3-Accessibilitytoinstance/)
-4.  [Infrastructure Deployment](4-s3log/)
-5.  [Application Security](5-Portfwd/)
-6.  [Monitoring & Observability](5-Portfwd/)
-7.  [Dọn dẹp tài nguyên](6-cleanup/)
+3.  [Application Containerization](3-Containerization/)
+4.  [Infrastructure Deployment](4-Infrastructure/)
+5.  [Application Security](5-Security/)
+6.  [Monitoring & Observability](6-Monitoring/)
+7.  [Dọn dẹp tài nguyên](7-cleanup/)
