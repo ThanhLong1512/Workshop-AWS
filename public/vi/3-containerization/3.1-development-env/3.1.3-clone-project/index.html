@@ -12,21 +12,21 @@
     <title>Hướng dẫn clone dự án FE&amp;BE và đẩy lên Github Repository :: AWS System Manager</title>
 
     
-    <link href="/css/nucleus.css?1751622284" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1751622284" rel="stylesheet">
-    <link href="/css/hybrid.css?1751622284" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1751622284" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1751622284" rel="stylesheet">
-    <link href="/css/auto-complete.css?1751622284" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1751622284" rel="stylesheet">
-    <link href="/css/theme.css?1751622284" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1751622284" rel="stylesheet">
+    <link href="/css/nucleus.css?1751647436" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1751647436" rel="stylesheet">
+    <link href="/css/hybrid.css?1751647436" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1751647436" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1751647436" rel="stylesheet">
+    <link href="/css/auto-complete.css?1751647436" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1751647436" rel="stylesheet">
+    <link href="/css/theme.css?1751647436" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1751647436" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1751622284" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1751647436" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1751622284"></script>
+    <script src="/js/jquery-3.3.1.min.js?1751647436"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1751622284"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1751622284"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1751647436"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1751647436"></script>
 <script type="text/javascript">
     
         var baseurl = "\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1751622284"></script>
+<script type="text/javascript" src="/js/search.js?1751647436"></script>
 
     
   </div>
@@ -1350,7 +1350,15 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#cách-clone-dự-án-febe-và-đẩy-lên-github-repository">Cách clone dự án FE&amp;BE và đẩy lên Github Repository</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -1377,7 +1385,8 @@
 	<p>Sau khi bạn đã có 2 repository trong tài khoản GitHub của bạn, bạn giúp tôi tải phần mềm sau: <a href="https://code.visualstudio.com/">Visual Studio Code</a> và <a href="https://desktop.github.com/download/">GitHub Desktop</a> để thuận lợi trong việc clone dự án và đẩy lên GitHub Repository diễn ra nhanh hơn thì sau đây tôi sẽ giới thiệu sơ qua về 2 phần mềm đó</p>
 <ol>
 <li>
-<p><strong>Visual Studio Code là gì</strong></p>
+<p><strong>Visual Studio Code là gì</strong>
+<img alt="VSCODE" src="/images/3.Containerization/3.1/3.1.3/2.png"></p>
 <p><strong>Visual Studio Code (VS Code)</strong> là một trình soạn thảo mã nguồn miễn phí, đa nền tảng, được phát triển bởi Microsoft. Nó đã nhanh chóng trở thành một trong những trình soạn thảo phổ biến nhất dành cho các nhà phát triển, nhờ giao diện thân thiện, tính năng mạnh mẽ và khả năng mở rộng cao.</p>
 <p><strong>Lý do nên chọn Visual Studio Code?</strong></p>
 <ul>
@@ -1388,8 +1397,55 @@
 </ul>
 </li>
 <li>
-<p>GitHub Desktop là gì ?</p>
+<p><strong>GitHub Desktop là gì ?</strong></p>
+<p><img alt="GitHub Desktop" src="/images/3.Containerization/3.1/3.1.3/1.png"></p>
+<p><strong>GitHub Desktop</strong> đóng vai trò là cầu nối cho những người thích giao diện đồ họa hơn là thao tác dòng lệnh. Nó hợp lý hóa quy trình làm việc của Git, từ việc sao chép kho lưu trữ đến đẩy thay đổi và tích hợp các tính năng bổ sung như tô sáng cú pháp và xem xét mã để tạo điều kiện cho sự cộng tác và nâng cao năng suất.</p>
+<p><strong>Ưu điểm và Nhược điểm</strong></p>
+<ul>
+<li>
+<p><strong>Ưu điểm của GitHub Desktop</strong></p>
+<ul>
+<li>Thiết kế trực quan: Đơn giản hóa việc điều hướng, cam kết và quản lý nhánh để mang lại trải nghiệm mượt mà cho người dùng.</li>
+<li>Tích hợp GitHub: Cung cấp quy trình làm việc liền mạch để quản lý kho lưu trữ và cộng tác trực tiếp với GitHub.</li>
+<li>Hợp tác hợp lý: Nâng cao nỗ lực của nhóm với việc xem xét mã, thảo luận và đóng góp dễ dàng cho các dự án GitHub.</li>
+<li>Cập nhật tự động: Tự động cập nhật các tính năng mới nhất và cải tiến bảo mật cho ứng dụng.</li>
+</ul>
 </li>
+<li>
+<p><strong>Nhược điểm của GitHub Desktop</strong></p>
+<ul>
+<li>Không có hỗ trợ Linux chính thức: Việc không có phiên bản Linux chính thức có thể dẫn đến những thách thức về khả năng tương thích và cập nhật</li>
+<li>Bộ tính năng cơ bản: Có thể không đủ cho người dùng tìm kiếm các chức năng Git nâng cao như rebase tương tác hoặc biểu đồ cam kết chi tiết.</li>
+<li>Giới hạn đối với quy trình làm việc phức tạp: Những người có dự án phức tạp có thể thấy khả năng của GitHub Desktop có phần hạn chế.</li>
+<li>Tập trung vào GitHub: Được tối ưu hóa cho GitHub, điều này có thể hạn chế tiện ích của GitHub đối với các dự án được lưu trữ trên các nền tảng khác.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="cách-clone-dự-án-febe-và-đẩy-lên-github-repository">Cách clone dự án FE&amp;BE và đẩy lên Github Repository</h3>
+<ol>
+<li><strong>Bước 1:</strong> Bạn truy cập mẫu 2 repository FE&amp;BE từ 2 đường link sau: <a href="https://github.com/ThanhLong1512/FE-Dentist">FE Repository</a> và <a href="https://github.com/ThanhLong1512/BE-Dentist">BE repository</a>.</li>
+<li><strong>Bước 2:</strong> Copy đường dẫn từ BE repository và sau đó mở <strong>GitHub Desktop</strong> lên.
+<img alt="GitHub Desktop" src="/images/3.Containerization/3.1/3.1.3/3.png"></li>
+<li><strong>Bước 3:</strong> Sau khi mở Github Desktop thành công sau đó bạn vào <strong>File -&gt; Clone a repository -&gt; URL</strong>.
+<img alt="GitHub Desktop" src="/images/3.Containerization/3.1/3.1.3/4.png"></li>
+<li><strong>Bước 4:</strong> Bạn dán đường dẫn repository mà bạn đã copy vào ô input đầu tiên và tạo một folder mà bạn muốn lưu.
+<img alt="GitHub Desktop" src="/images/3.Containerization/3.1/3.1.3/5.png"></li>
+<li><strong>Bước 5:</strong> Sau khi bạn clone thành công thì bạn tiếp tục mở Visual Studio Code.</li>
+<li><strong>Bước 6:</strong> Chọn <strong>File -&gt; Open folder to start working -&gt; Chọn thư mục mà bạn đã clone về</strong>.
+<img alt="GitHub Desktop" src="/images/3.Containerization/3.1/3.1.3/6.png"></li>
+<li><strong>Bước 7:</strong> Sau khi đã xuất hiện các thư mục mà dự án bạn đã clone tiếp tục bạn chọn <strong>Terminal -&gt; New Terminal</strong> rồi sau đó bạn chạy lệnh <strong>npm install</strong>.
+<img alt="GitHub Desktop" src="/images/3.Containerization/3.1/3.1.3/7.png"></li>
+<li><strong>Bước 8:</strong> Chạy tiếp tục lệnh <strong>npm run start</strong> và nếu xuất hiện giống hình ảnh bên dưới thì chúc mừng bạn.
+<img alt="GitHub Desktop" src="/images/3.Containerization/3.1/3.1.3/8.png"></li>
+<li><strong>Bước 9:</strong> Tiếp tục sẽ đẩy project này lên repository mà bạn đã tạo</li>
+<li><strong>Bước 10:</strong> Bạn gõ lệnh <strong>git remote remove origin</strong> để xóa remote cũ từ repository mà bạn đã clone.</li>
+<li><strong>Bước 11:</strong> Sau đó bạn mở repository <strong>AWS-BE</strong> và copy đường dẫn ở hình bên dưới và đưa vào terminal.
+<img alt="GitHub Desktop" src="/images/3.Containerization/3.1/3.1.3/9.png"></li>
+<li><strong>Bước 12:</strong> Sau khi tiếp tục gõ lệnh <strong>git push -u origin main</strong> và sau đó ra reload lại trang và nếu xuất hiện hình bên dưới thì chúc mừng bạn.
+<img alt="GitHub Desktop" src="/images/3.Containerization/3.1/3.1.3/10.png"></li>
+<li><strong>Bước 13:</strong> Lặp lại từ <strong>B2 -&gt; B12</strong> cho FE</li>
 </ol>
 
 
@@ -2056,19 +2112,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1751622284"></script>
-    <script src="/js/perfect-scrollbar.min.js?1751622284"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1751622284"></script>
-    <script src="/js/jquery.sticky.js?1751622284"></script>
-    <script src="/js/featherlight.min.js?1751622284"></script>
-    <script src="/js/highlight.pack.js?1751622284"></script>
+    <script src="/js/clipboard.min.js?1751647436"></script>
+    <script src="/js/perfect-scrollbar.min.js?1751647436"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1751647436"></script>
+    <script src="/js/jquery.sticky.js?1751647436"></script>
+    <script src="/js/featherlight.min.js?1751647436"></script>
+    <script src="/js/highlight.pack.js?1751647436"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1751622284"></script>
-    <script src="/js/learn.js?1751622284"></script>
-    <script src="/js/hugo-learn.js?1751622284"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1751647436"></script>
+    <script src="/js/learn.js?1751647436"></script>
+    <script src="/js/hugo-learn.js?1751647436"></script>
 
-    <link href="/mermaid/mermaid.css?1751622284" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1751622284"></script>
+    <link href="/mermaid/mermaid.css?1751647436" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1751647436"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

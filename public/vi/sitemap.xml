@@ -158,6 +158,19 @@
                 href="//localhost:1313/vi/3-containerization/3.1-development-env/3.1.1-install-docker/"
                 />
   </url><url>
+    <loc>//localhost:1313/vi/3-containerization/3.1-development-env/3.1.3-clone-project/</loc>
+    <lastmod>2025-06-21T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/3-containerization/3.1-development-env/3.1.3-clone-project/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/3-containerization/3.1-development-env/3.1.3-clone-project/"
+                />
+  </url><url>
     <loc>//localhost:1313/vi/2-prerequiste/2.3-sgandnetwork/</loc>
     <lastmod>2025-06-21T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -299,6 +312,19 @@
                 rel="alternate"
                 hreflang="vi"
                 href="//localhost:1313/vi/3-containerization/3.3-deloy-scripts/3.3.2-configure-env/"
+                />
+  </url><url>
+    <loc>//localhost:1313/vi/3-containerization/3.1-development-env/3.1.2-setup-git/</loc>
+    <lastmod>2025-06-21T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/3-containerization/3.1-development-env/3.1.2-setup-git/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/3-containerization/3.1-development-env/3.1.2-setup-git/"
                 />
   </url><url>
     <loc>//localhost:1313/vi/2-prerequiste/2.3-sgandnetwork/2.3.2-setupnetwork/</loc>
@@ -455,30 +481,6 @@
                 rel="alternate"
                 hreflang="vi"
                 href="//localhost:1313/vi/7-cleanup/"
-                />
-  </url><url>
-    <loc>//localhost:1313/vi/3-containerization/3.1-development-env/3.1.2-setup-git/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="//localhost:1313/3-containerization/3.1-development-env/3.1.2-setup-git/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="//localhost:1313/vi/3-containerization/3.1-development-env/3.1.2-setup-git/"
-                />
-  </url><url>
-    <loc>//localhost:1313/vi/3-containerization/3.1-development-env/3.1.3-clone-project/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="//localhost:1313/3-containerization/3.1-development-env/3.1.3-clone-project/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="//localhost:1313/vi/3-containerization/3.1-development-env/3.1.3-clone-project/"
                 />
   </url><url>
     <loc>//localhost:1313/vi/categories/</loc>
