@@ -18,11 +18,10 @@ pre: " <b> 2.1.3 </b> "
 3. Choose an Amazon Machine Image (AMI):
 
    - Select **Quick Start**.
-   - Choose **Amazon Linux**.
-   - AMI: Select **Amazon Linux 2 AMI**.
+   - Choose **Ubuntu**.
+   - AMI: Select **Ubuntu Server 24.04 LTS**.
 
-- **Pro Tip:** The Amazon Linux 2 AMI is regularly updated by AWS with security patches and performance improvements. Using this AMI ensures a stable and secure foundation for your applications.
-  ![EC2](/images/2.prerequisite/2.1/2.1.3/1.png)
+![EC2](/images/2.prerequisite/2.1/2.1.3/4.png)
 
 4. Key Pair Configuration:
 
@@ -42,7 +41,7 @@ pre: " <b> 2.1.3 </b> "
 6. Review the settings and click Launch instance.
 
 7. Once the instance is launched, click **View all instances** to check its details
-   ![EC2](/images/2.prerequisite/2.1/2.1.3/4.png)
+   ![EC2](/images/2.prerequisite/2.1/2.1.3/5.png)
 8. Wait for about 5 minutes until the Status check shows 2/2 checks passed and the instance state changes to Running.
 
 **Pro Tip:** 2/2 checks passed status confirms that both the system check (performed by AWS) and the instance check (performed by the OS) were successful. This ensures your instance is ready for use.

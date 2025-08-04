@@ -29,6 +29,7 @@ Docker là một platform containerization cho phép đóng gói ứng dụng v�
 
 ### Nội dung:
 
-- [Viết Dockerfile cho Frontend (React.js)](./3.2.1-dockerfile-FE//)
-- [Viết Dockerfile cho Backend (Node.js/Express)](./3.2.2-dockerfile-BE//)a
-- [Build và test containers locally](./3.2.3-test-containers//)
+- [Thiết lập môi trường để triển khai](./3.2.1-preparation//)
+- [Viết Dockerfile cho Frontend (React.js)](./3.2.2-dockerfile-FE//)
+- [Viết Dockerfile cho Backend (Node.js/Express)](./3.2.3-dockerfile-BE//)
+- [Thiết lập CI/CD Pipeline cho React.js và Nodejs với GitHub Actions](./3.2.4-github-action//)

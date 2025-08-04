@@ -8,5 +8,6 @@ pre: " <b> 3. </b> "
 
 ### Content
 
-3.1. [Connect to EC2 Public Server](3.1-public-instance/) \
-3.2. [Cconnect to EC2 Private Server](3.2-private-instance/)
+1.  [Prepare Development Environment](3.1-Development-env/)
+2.  [Create Docker Container](3.2-create-dockercontainer/)
+3.  [Prepare Deployment Scripts](3.3-deloy-scripts/)

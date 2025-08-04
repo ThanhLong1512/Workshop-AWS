@@ -29,6 +29,7 @@ Docker is a containerization platform that packages applications and their depen
 
 ### Nội dung:
 
-- [Create Dockerfile for Frontend (React.js)](./3.2.1-dockerfile-FE//)
-- [Create Dockerfile for Backend (Node.js/Express)](./3.2.2-dockerfile-BE//)
-- [Build and Test Containers Locally](./3.2.3-test-containers//)
+- [Build and Test Containers Locally](./3.2.1-preparation//)
+- [Create Dockerfile for Frontend (React.js)](./3.2.2-dockerfile-FE//)
+- [Create Dockerfile for Backend (Node.js/Express)](./3.2.3-dockerfile-BE//)
+- [Set up a CI/CD Pipeline for React.js and Nodejs with GitHub Actions](./3.2.4-github-action//)

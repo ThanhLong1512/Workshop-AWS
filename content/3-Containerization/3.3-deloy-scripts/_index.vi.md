@@ -1,22 +1,36 @@
 ---
-title: "Tạo kết nối đến máy chủ EC2 Private"
+title: "Deploy Scripts"
 date: "2025-06-21"
-weight: 2
+weight: 3
 chapter: false
-pre: " <b> 3.2. </b> "
+pre: " <b> 3.3. </b> "
 ---
 
-Đối với **Windows instance** nằm trong **private subnet**, không có **public IP**, không có **internet gateway** nên không thể đi ra ngoài **internet.**\
-Với loại instance này, cách làm truyền thống là ta sẽ sử dụng kỹ thuật Bastion host tốn nhiều chi phí và công sức, nhưng ở đây chúng ta sẽ sử dụng Session Manager với loại này.\
-Cơ bản là **private instance** vẫn phải mở cổng **TCP 443** tới **System Manager**, nhưng không cho kết nối đó đi ra ngoài internet mà chỉ cho đi trong chính VPC của mình, nên đảm bảo được vấn đề bảo mật.\
-Để làm được điều đó, ta phải đưa endpoint của System Manager vào trong VPC, nghĩa là sử dụng **VPC interface endpoint:**
+### Tổng quan
 
-![ConnectPrivate](/images/arc-03.png)
+Sau khi đã hoàn thành việc containerization ứng dụng với Docker và thiết lập CI/CD pipeline với GitHub Actions, bước tiếp theo là tạo ra các deploy scripts để tự động hóa quá trình triển khai ứng dụng lên các môi trường khác nhau.
+Deploy scripts là những script tự động hóa giúp đơn giản hóa việc deployment, từ việc pull Docker images, stop/start containers, đến việc kiểm tra health check và rollback khi cần thiết. Điều này đặc biệt quan trọng khi bạn cần deploy thường xuyên hoặc có nhiều môi trường khác nhau (development, staging, production).
 
-**VPC interface endpoint** được gắn với subnet nên cách làm này không những với **private subnet** mà còn có thể làm với **public subnet**, nghĩa là với **public subnet**, bạn hoàn toàn có thể không cho **TCP 443** đi ra ngoài internet.
+#### Lợi ích của Deploy Scripts
 
-### Nội dung:
+- **Tự động hóa hoàn toàn**: Giảm thiểu các bước manual và human errors trong quá trình deployment.
+- **Consistency**: Đảm bảo quá trình deployment được thực hiện nhất quán trên tất cả các môi trường.
+- **Rollback nhanh chóng**: Có thể quay lại phiên bản trước đó một cách nhanh chóng khi gặp sự cố.
+- **Environment Management**: Quản lý các biến môi trường và cấu hình khác nhau cho từng environment.
+- **Health Checking**: Tự động kiểm tra ứng dụng sau khi deploy để đảm bảo hoạt động bình thường.
 
-- [Kích hoạt DNS hostnames](./3.2.1-enablevpcdns/)
-- [Tạo VPC Endpoint](./3.2.2-createvpcendpoint/)
-- [Kết nối Private Instance](./3.3.3-connectec2/)
+#### Kiến trúc Deploy Scripts
+
+Trong phần này, chúng ta sẽ tạo deploy scripts cho cả Frontend (React.js) và Backend (Node.js) với các tính năng:
+
+- **Environment Detection**: Tự động detect và áp dụng cấu hình phù hợp cho từng môi trường
+- **Docker Management**: Tự động pull images, manage containers, và cleanup resources
+- **Health Monitoring**: Kiểm tra trạng thái ứng dụng sau deployment
+- **Logging & Notification**: Ghi log chi tiết và thông báo kết quả deployment
+- **Rollback Mechanism**: Khả năng rollback về version trước khi có lỗi
+
+### Nội dung
+
+1.  [Tạo scripts để deploy ứng dụng React.js](3.3.1-deploy-fe/)
+2.  [Tạo scripts để deploy ứng dụng Node.js](3.3.2-deploy-be/)
+3.  [Domain & DNS Configuration với Route 53](3.3.3-domain-route53/)

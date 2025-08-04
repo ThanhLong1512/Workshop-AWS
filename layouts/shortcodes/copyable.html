@@ -1,6 +1,6 @@
 <div class="terminal-box">
   <div class="terminal-header">
-    <span class="terminal-title">bash</span>
+    <span class="terminal-title">{{ .Get "title" | default "bash" }}</span>
     <button class="copy-button" onclick="copyToClipboard(this)">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -68,6 +68,7 @@
     border-radius: 3px;
     display: flex;
     align-items: center;
+    transition: all 0.2s ease;
   }
 
   .copy-button:hover {

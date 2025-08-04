@@ -1,7 +1,7 @@
 ---
 title: "Cài đặt Docker Desktop"
 date: "2025-06-21"
-weight: 2
+weight: 1
 chapter: false
 pre: " <b> 3.1.1 </b> "
 ---
