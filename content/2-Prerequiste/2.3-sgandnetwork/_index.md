@@ -1,7 +1,7 @@
 ---
 title: "Security Groups & Network Setup"
 date: "2025-06-21"
-weight: 2
+weight: 3
 chapter: false
 pre: " <b> 2.3 </b> "
 ---

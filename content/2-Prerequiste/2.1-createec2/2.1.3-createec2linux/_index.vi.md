@@ -1,7 +1,7 @@
 ---
 title: "Tạo Linux EC2"
 date: "2025-06-21"
-weight: 5
+weight: 3
 chapter: false
 pre: " <b> 2.1.3 </b> "
 ---

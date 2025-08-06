@@ -18,5 +18,6 @@ To learn how to create the foundational AWS services, you can refer to these lab
 ### Content
 
 - [Prepare VPC and EC2](2.1-createec2/)
-- [Create IAM Role](2.2-createiamrole/)
+- [Create IAM Policies](2.2-create-policies//)
 - [Security Groups & Network setup](2.3-sgandnetwork/)
+- [Create IAM Role](2.4-createiamrole//)
