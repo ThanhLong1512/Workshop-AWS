@@ -6,86 +6,165 @@ chapter: false
 pre: "<b>5. </b>"
 ---
 
-Chúng ta sẽ tiến hành các bước sau để xóa các tài nguyên chúng ta đã tạo trong bài thực hành này.
+Chúng ta sẽ tiến hành các bước sau để xóa toàn bộ các tài nguyên đã tạo trong bài thực hành này theo đúng thứ tự để tránh lỗi phụ thuộc.
 
-#### Xóa EC2 instance
+**Bước 1: Dừng và xóa ALB (Application Load Balancer)**
 
-1. Truy cập [giao diện quản trị dịch vụ EC2](https://console.aws.amazon.com/ec2/v2/home)
+1. **Truy cập giao diện quản trị EC2**
 
-- Click **Instances**.
-- Click chọn cả 2 instance **Public Linux Instance** và **Private Windows Instance**.
-- Click **Instance state**.
-- Click **Terminate instance**, sau đó click **Terminate** để xác nhận.
+- Click **Load Balancers** trong menu bên trái
+- Chọn Application Load Balancer đã tạo
+- Click **Actions → Delete**
+- Xác nhận bằng cách gõ "confirm" và click **Delete**
 
-2. Truy cập [giao diện quản trị dịch vụ IAM](https://console.aws.amazon.com/iamv2/home#/home)
+2. **Xóa Target Groups**
 
-- Click **Roles**.
-- Tại ô tìm kiếm , điền **SSM**.
-- Click chọn **SSM-Role**.
-- Click **Delete**, sau đó điền tên role **SSM-Role** và click **Delete** để xóa role.
+- Click **Target Groups**
+- Chọn target group đã tạo cho ALB
+- Click Actions → **Delete**
+- Click **Yes**, delete để xác nhận
 
-![Clean](/images/6.clean/001-clean.png)
+**Bước 2: Xóa EC2 Instances**
 
-3. Click **Users**.
+**1. Xóa EC2 Instances**
 
-- Click chọn user **Portfwd**.
-- Click **Delete**, sau đó điền tên user **Portfwd** và click **Delete** để xóa user.
+- Truy cập giao diện **EC2**
+- Click **Instances**
+- Chọn tất cả instances (cả public và private)
+- Click Instance State → **Terminate instance**
+- Click **Terminate** để xác nhận
 
-#### Xóa S3 bucket
+**Bước 3: Xóa các AWS Services khác**
 
-1. Truy cập [giao diện quản trị dịch vụ System Manager - Session Manager](https://console.aws.amazon.com/systems-manager/session-manager).
+**Xóa CloudWatch và SNS**
 
-- Click tab **Preferences**.
-- Click **Edit**.
-- Kéo chuột xuống dưới.
-- Tại mục **S3 logging**.
-- Bỏ chọn **Enable** để tắt tính năng logging.
-- Kéo chuột xuống dưới.
-- Click **Save**.
+**1. Truy cập CloudWatch**
 
-2. Truy cập [giao diện quản trị dịch vụ S3](https://s3.console.aws.amazon.com/s3/home)
+- Click **Alarms → chọn các alarm đã tạo → Delete**
+- Click **Log groups → chọn Log groups → Delete log group(s)**
 
-- Click chọn S3 bucket chúng ta đã tạo cho bài thực hành. ( Ví dụ : lab-fcj-bucket-0001 )
-- Click **Empty**.
-- Điền **permanently delete**, sau đó click **Empty** để tiến hành xóa object trong bucket.
-- Click **Exit**.
+**2. Truy cập SNS**
 
-3. Sau khi xóa hết object trong bucket, click **Delete**
+- Click **Topics → chọn topic → Delete**
+- Click **Subscriptions → chọn subscription → Delete**
 
-![Clean](/images/6.clean/002-clean.png)
+**3. Xóa Route 53**
 
-4. Điền tên S3 bucket, sau đó click **Delete bucket** để tiến hành xóa S3 bucket.
+- Truy cập **Route 53**
+- Click **Hosted zones**
+- Chọn hosted zone (trừ các bản ghi mặc định)
+- Xóa các record set trước, sau đó xóa hosted zone
 
-![Clean](/images/6.clean/003-clean.png)
+**4. Xóa KMS và WAF**
 
-#### Xóa các VPC Endpoint
+- Truy cập **KMS**
+- Click Customer managed keys
+- Chọn key đã tạo → Key actions → Schedule key deletion
+- Chọn thời gian chờ (tối thiểu 7 ngày) → **Schedule deletion**
 
-1. Truy cập vào [giao diện quản trị dịch vụ VPC](https://console.aws.amazon.com/vpc/home)
+**5. Truy cập WAF**
 
-- Click **Endpoints**.
-- Chọn 4 endpoints chúng ta đã tạo cho bài thực hành bao gồm **SSM**, **SSMMESSAGES**, **EC2MESSAGES**, **S3GW**.
-- Click **Actions**.
-- Click **Delete VPC endpoints**.
+- Click **Web ACLs**
+- Chọn **Web ACL → Delete**
+- Gõ "delete" để xác nhận
 
-![Clean](/images/6.clean/004-clean.png)
+**Bước 5: Dọn dẹp CloudFront**
 
-2. Tại ô confirm , điền **delete**.
+- Truy cập **CloudFront**
+- Chọn distribution đã tạo
+- Click Disable và chờ status chuyển thành "Disabled"
+- Sau đó click **Delete**
 
-- Click **Delete** để tiến hành xóa các endpoints.
+**Bước 6: Xóa IAM Roles và Users**
 
-3. Click biểu tượng refresh, kiểm tra tất cả các endpoints đã bị xóa trước khi làm bước tiếp theo.
+**1. Truy cập IAM**
 
-![Clean](/images/6.clean/005-clean.png)
+- Click **Roles**
+- Tìm kiếm và chọn các role đã tạo (SSM-Role, ECS-Role, etc.)
+- Click **Delete** cho từng role
+- Điền tên role để xác nhận
 
-#### Xóa VPC
+**2. Xóa IAM Users**
 
-1. Truy cập vào [giao diện quản trị dịch vụ VPC](https://console.aws.amazon.com/vpc/home)
+- Click **Users**
+- Chọn user đã tạo (Portfwd, etc.)
+- Click **Delete user**
+- Điền tên user để xác nhận
 
-- Click **Your VPCs**.
-- Click chọn **Lab VPC**.
-- Click **Actions**.
-- Click **Delete VPC**.
+**3. Xóa IAM Policies (custom)**
 
-2. Tại ô confirm, điền **delete** để xác nhận, click **Delete** để thực hiện xóa **Lab VPC** và các tài nguyên liên quan.
+- Click **Policies**
+- Filter theo "Customer managed"
+- **Chọn policy đã tạo → Actions → Delete**
 
-![Clean](/images/6.clean/006-clean.png)
+**Bước 7: Xóa S3 Bucket**
+
+**1. Truy cập S3**
+
+- Chọn bucket đã tạo
+- Click **Empty**
+- Gõ "permanently delete" → Empty
+- Click **Exit**
+
+**2. Xóa bucket**
+
+- Click **Delete**
+- Gõ tên bucket để xác nhận → **Delete bucket**
+
+**Bước 8: Xóa Internet Gateway và NAT Gateway**
+
+**1. Xóa NAT Gateway trước**
+
+- Click NAT Gateways
+- Chọn NAT Gateway → Actions → Delete NAT gateway
+- Gõ "delete" để xác nhận
+
+**2. Giải phóng Elastic IP**
+
+- Click Elastic IPs
+- Chọn EIP đã tạo → Actions → Release Elastic IP address
+
+**3. Detach và xóa Internet Gateway**
+
+- Click **Internet Gateways**
+- Chọn IGW → Actions → Detach from VPC
+- Sau đó **Actions → Delete internet gateway**
+
+**Bước 9: Xóa VPC và các thành phần liên quan**
+
+**1. Xóa Security Groups (trừ default)**
+
+- Click **Security Groups**
+- Chọn các security group đã tạo (không chọn default)
+- Chọn **Actions → Delete security group**
+
+**2. Xóa Route Tables (trừ main)**
+
+- Click **Route Tables**
+- Chọn route table đã tạo (không chọn main)
+- Click **Actions → Delete route table**
+
+**3. Xóa Subnets**
+
+- Click **Subnets**
+- Chọn tất cả subnet đã tạo
+- Click **Actions → Delete subnet**
+
+**4. Xóa VPC**
+
+- Click **Your VPCs**
+- Chọn VPC đã tạo (Lab VPC)
+- Click **Actions → Delete VPC**
+- Gõ "delete" để xác nhận
+
+Lưu ý quan trọng
+
+⚠️ Thứ tự xóa rất quan trọng: Phải xóa theo thứ tự từ các tài nguyên phụ thuộc đến tài nguyên chính để tránh lỗi.
+
+⚠️ Kiểm tra Region: Đảm bảo đang làm việc ở đúng AWS Region chứa các tài nguyên.
+
+⚠️ CloudFront: Cần disable trước khi xóa và có thể mất 15-20 phút để hoàn tất.
+
+⚠️ Billing: Kiểm tra AWS Billing Console để đảm bảo không còn tài nguyên nào đang tính phí.
+
+✅ Hoàn tất: Sau khi thực hiện xong tất cả các bước, hãy chờ 5-10 phút rồi kiểm tra lại từng service để đảm bảo đã xóa sạch.

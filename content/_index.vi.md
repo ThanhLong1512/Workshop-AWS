@@ -19,7 +19,7 @@ Workshop này hướng dẫn bạn xây dựng một hệ thống ứng dụng w
 - Security: KMS encryption, SNS notifications
 - Monitoring: CloudWatch metrics và alerts
 
-![ConnectPrivate](/images/arc-workshop.png)
+![ConnectPrivate](/images/WorkShop_Architecture.png)
 
 ### Mục đích
 
@@ -43,5 +43,5 @@ Workshop này hướng dẫn bạn xây dựng một hệ thống ứng dụng w
 1.  [Giới thiệu](1-introduce/)
 2.  [Các bước chuẩn bị](2-Prerequiste/)
 3.  [Thiết lập và Containerization](3-Containerization/)
-4.  [Bảo mật và giám sát](4-Security&Monitoring/)
+4.  [Bảo mật và giám sát phần mềm](4-Security&Monitoring/)
 5.  [Dọn dẹp tài nguyên](5-cleanup/)

@@ -23,7 +23,7 @@ This workshop guides you through building a complete containerized web applicati
 
 - Monitoring: CloudWatch metrics and alerts
 
-![ConnectPrivate](/images/arc-workshop.png)
+![ConnectPrivate](/images/WorkShop_Architecture.png)
 
 ### Objectives
 
@@ -56,5 +56,5 @@ This workshop guides you through building a complete containerized web applicati
 1.  [Introduction](1-introduce/)
 2.  [Prerequisites](2-Prerequiste/)
 3.  [Application Containerization](3-Containerization/)
-4.  [Security & Monitoring](4-Security&Monitoring/)
+4.  [Security & Monitoring Application](4-Security&Monitoring/)
 5.  [Cleanup Resource](5-cleanup/)

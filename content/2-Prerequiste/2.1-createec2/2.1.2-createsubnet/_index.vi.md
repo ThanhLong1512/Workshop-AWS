@@ -21,9 +21,6 @@ pre: " <b> 2.1.2 </b> "
 - Tại mục **Availability Zone** chọn Availability zone đầu tiên.
 - Tại mục **IPv4 CIRD block** điền **10.0.0.0/28**.
 
-![VPC](/images/2.prerequisite/2.2/1.png)
-![VPC](/images/2.prerequisite/2.2/2.png)
-
 3. Kéo xuống cuối trang , click **Create subnet**.
 
 4. Click chọn **Mern-stack Subnet**.
@@ -36,3 +33,8 @@ pre: " <b> 2.1.2 </b> "
 5. Click chọn **Enable auto-assign public IPv4 address**.
 
 - Click **Save**.
+
+6. Tạo một Subnet tương tự với cấu hình bên dưới đây:
+
+- **Subnet name** điền **Mern-stack Subnet 02**.
+- **Availability Zone** chọn **ap-southeast-1c**

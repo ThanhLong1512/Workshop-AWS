@@ -14,5 +14,4 @@ Trong kiến trúc ứng dụng web hiện đại, việc đảm bảo bảo m�
 
 1.  [Mã hóa dữ liệu với KMS](4.1-aws-kms/)
 2.  [Bảo vệ ứng dụng web với AWS WAF](4.2-aws-waf/)
-3.  [Giám sát và cảnh báo với CloudWatch](4.3-aws-cloudwatch/)
-4.  [Hệ thống thông báo với SNS](4.4-aws-sns/)
+3.  [Monitor and automatically notify with CloudWatch and SNS](4.3-aws-cloudwatch/)

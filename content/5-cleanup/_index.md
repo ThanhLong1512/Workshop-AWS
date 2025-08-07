@@ -6,83 +6,136 @@ chapter: false
 pre: "<b>5. </b>"
 ---
 
-We will take the following steps to delete the resources we created in this exercise.
+We will perform the following steps to delete all the resources created in this exercise in the correct order to avoid dependency errors.
 
-#### Delete EC2 instance
+**Step 1: Remove Application Load Balancer (ALB)**
 
-1. Go to [EC2 service management console](https://console.aws.amazon.com/ec2/v2/home)
+- Navigate to EC2 Management Console
+- Select Load Balancers from the left menu
+- Choose the created Application Load Balancer
+- Click Actions → Delete
+- Type "confirm" and click Delete
 
-   - Click **Instances**.
-   - Select both **Public Linux Instance** and **Private Windows Instance** instances.
-   - Click **Instance state**.
-   - Click **Terminate instance**, then click **Terminate** to confirm.
+2. Delete Target Groups
 
-2. Go to [IAM service management console](https://console.aws.amazon.com/iamv2/home#/home)
-   - Click **Roles**.
-   - In the search box, enter **SSM**.
-   - Click to select **SSM-Role**.
-   - Click **Delete**, then enter the role name **SSM-Role** and click **Delete** to delete the role.
+- Go to Target Groups
+- Select the target group created for ALB
+- Click Actions → Delete
+- Confirm with Yes, delete
 
-![Clean](/images/6.clean/001-clean.png)
+**Step 2: Terminate EC2 Instances**
 
-3. Click **Users**.
-   - Click on user **Portfwd**.
-   - Click **Delete**, then enter the user name **Portfwd** and click **Delete** to delete the user.
+- In the EC2 Dashboard
+- Select Instances
+- Choose all instances (both public and private)
+- Click Instance State → Terminate instance
+- Confirm with Terminate
 
-#### Delete S3 bucket
+**Step 3: Delete other AWS Services**
 
-1. Access [System Manager - Session Manager service management console](https://console.aws.amazon.com/systems-manager/session-manager).
+**Delete CloudWatch and SNS**
 
-   - Click the **Preferences** tab.
-   - Click **Edit**.
-   - Scroll down.
-   - In the section **S3 logging**.
-   - Uncheck **Enable** to disable logging.
-   - Scroll down.
-   - Click **Save**.
+1. Navigate to CloudWatch
 
-2. Go to [S3 service management console](https://s3.console.aws.amazon.com/s3/home)
+- Select Alarms → choose created alarms → Delete
+- Go to Log groups → select Log groups → Delete log group(s)
 
-   - Click on the S3 bucket we created for this lab. (Example: lab-fcj-bucket-0001 )
-   - Click **Empty**.
-   - Enter **permanently delete**, then click **Empty** to proceed to delete the object in the bucket.
-   - Click **Exit**.
+2. SNS Cleanup:
 
-3. After deleting all objects in the bucket, click **Delete**
+- Access SNS Console
+- Select Topics → choose topic → Delete
+- Go to Subscriptions → select subscription → Delete
 
-![Clean](/images/6.clean/002-clean.png)
+3. Route 53:
 
-4. Enter the name of the S3 bucket, then click **Delete bucket** to proceed with deleting the S3 bucket.
+- Access Route 53 Console
+- Select Hosted zones
+- Delete record sets first, then delete the hosted zone
 
-![Clean](/images/6.clean/003-clean.png)
+4. Deleting KMS Keys
 
-#### Delete VPC Endpoints
+- Go to AWS KMS Console
+- Select Customer managed keys
+- Choose the key you created
+- Click Key actions → Schedule key deletion
+- Set waiting period (minimum 7 days)
+- Confirm with Schedule deletion
 
-1. Go to [VPC service management console](https://console.aws.amazon.com/vpc/home)
-   - Click **Endpoints**.
-   - Select the 4 endpoints we created for the lab including **SSM**, **SSMMESSAGES**, **EC2MESSAGES**, **S3GW**.
-   - Click **Actions**.
-   - Click **Delete VPC endpoints**.
+5. WAF & Shield:
 
-![Clean](/images/6.clean/004-clean.png)
+- Go to WAF & Shield Console
+- Select Web ACLs
+- Choose Web ACL → Delete
+- Type "delete" to confirm
 
-2. In the confirm box, enter **delete**.
+**Step 5: Remove CloudFront Distribution**
 
-   - Click **Delete** to proceed with deleting endpoints.
+- Access CloudFront Console
+- Select the distribution
+- Click Disable and wait for status to change to "Disabled"
+- Then click Delete
 
-3. Click the refresh icon, check that all endpoints have been deleted before proceeding to the next step.
+**Step 6: Xóa IAM Roles và Users**
 
-![Clean](/images/6.clean/005-clean.png)
+- Navigate to IAM Console
+- For Roles:
+- Select created roles (SSM-Role, ECS-Role, etc.)
+- Click Delete
+- Enter role name to confirm
+- For Policies:
+- Filter by "Customer managed"
+- Select policy → Actions → Delete
 
-#### Delete VPC
+**Step 7: Remove Storage Resources**
 
-1. Go to [VPC service management console](https://console.aws.amazon.com/vpc/home)
+S3 Buckets:
 
-   - Click **Your VPCs**.
-   - Click on **Lab VPC**.
-   - Click **Actions**.
-   - Click **Delete VPC**.
+- Go to S3 Console
+- Select the bucket
+- Click Empty
+- Type "permanently delete" → Empty
+- Then click Delete bucket
+- Enter bucket name to confirm
 
-2. In the confirm box, enter **delete** to confirm, click **Delete** to delete **Lab VPC** and related resources.
+**Step 8: Remove Network Gateways**
 
-![Clean](/images/6.clean/006-clean.png)
+1. NAT Gateway:
+
+- Select NAT Gateways
+- Choose NAT Gateway → Actions → Delete NAT gateway
+- Type "delete" to confirm
+
+2. Internet Gateway:
+
+- Access Internet Gateways
+- Select IGW → Actions → Detach from VPC
+- Then Actions → Delete internet gateway
+
+**Step 9: Final VPC Cleanup**
+
+1. Delete Security Groups (except default):
+
+- Select created security groups
+  -Actions → Delete security group
+
+2. Remove Subnets:
+
+- Select all created subnets
+- Actions → Delete subnet
+
+3. Delete VPC:
+
+- Select the Lab VPC
+- Actions → Delete VPC
+- Type "delete" to confirm
+
+Important Notes
+⚠️ Order Matters: Always delete dependent resources first
+
+⚠️ Region Check: Verify you're working in the correct AWS Region.
+
+⚠️ CloudFront: Disable before deleting (takes 15-20 minutes)
+
+⚠️ Billing: Check AWS Billing Console to confirm no active resources
+
+✅ Completion: After completing all steps, your AWS environment should be completely clean with no remaining resources from the lab. This ensures you won't incur any unexpected charges.
